@@ -1,0 +1,279 @@
+%--------------------------------------------------------------
+% thesis.tex 
+%--------------------------------------------------------------
+% - template for the main file of Informatica@Unifi Thesis 
+% - based on Classic Thesis Style Copyright (C) 2008 
+%   Andr\'e Miede http://www.miede.de   
+%--------------------------------------------------------------
+
+%--------------------DOCUMENT-CLASS----------------------------
+\documentclass[openright,titlepage,oneside,fleqn,
+	headinclude,12pt,a4paper,footinclude,makeidx]{scrbook}
+
+% sostituire "oneside" con "twoside" per stampa fronte-retro
+% aggiungere "hidelinks" per eliminare i box nei link ipertestuali
+%--------------------------------------------------------------
+
+%--------------------PACKAGES----------------------------------
+\usepackage[italian]{babel} % italian rende i nomi "bibliography" e "index" in italiano
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc} 
+\usepackage[square,numbers]{natbib} 
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{ellipsis}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage[format=plain,labelformat=simple,labelsep=colon]{caption}
+\usepackage{appendix}
+\usepackage{siunitx}
+\usepackage{lipsum}
+\usepackage{multirow} % per tabelle multirow
+\usepackage{comment} % per enviroment comment: \begin{comment}...\end{comment}
+\usepackage{dia-classicthesis-ldpkg}
+
+\usepackage{amsthm} %necessaria per theoremstyle
+\usepackage{mathabx} %per bigtimes, simbolo di prodotto cartesiano
+
+
+\usepackage[eulerchapternumbers, linedheaders, subfig, beramono, eulermath, parts, dottedtoc]{classicthesis}
+% Se non usiamo dottedtoc per l'indice,
+% \usepackage[eulerchapternumbers,linedheaders,subfig,beramono,eulermath, parts]{classicthesis}
+% al suo posto usiamo tocstyle:
+% \usepackage{tocstyle}
+% \usetocstyle{allwithdot}
+% PROBLEMA: nome dei capitoli minuscoli
+%\renewcommand{\cftchappagefont}{\normalfont}
+%\usepackage{tocloft}
+%\renewcommand{\cfttoctitlefont}{\hfill\Large\itshape}
+%\renewcommand\cfttocfont{\normalfont}
+
+\usepackage{imakeidx}
+\makeindex[intoc] % aggiunge al ToC l'indice analitico
+% sembra non funzionare con tocstyle
+%\makeindex
+
+\usepackage{wrapfig}
+\usepackage[italian,noabbrev]{cleveref}
+%---------------------------------------------------------------
+
+%--------------------NEWCOMMANDS--------------------------------
+\newcommand{\myItalianTitle}{Titolo Italiano\xspace}
+\newcommand{\myEnglishTitle}{English Title\xspace}
+\newcommand{\myDegree}{Corso di Laurea in Fisica e Astrofisica\xspace}
+\newcommand{\myCurriculum}{Generale\xspace}
+\newcommand{\myName}{Giulia Leone\xspace}
+\newcommand{\myRelatore}{Franco Bagnoli\xspace}
+%\newcommand{\myCorelatore}{Gabriele Costa\xspace}
+%\newcommand{\myOtherCorelatore}{Letterio Galletta\xspace}
+\newcommand{\myFaculty}{Scuola di Scienze Matematiche, Fisiche e Naturali\xspace}
+\newcommand{\myUni}{\protect{Università degli Studi di Firenze}\xspace}
+\newcommand{\myLocation}{Firenze\xspace}
+\newcommand{\myTime}{Anno Accademico 2019-2020\xspace}
+
+% \newcommand{\myVersion}{Version 0.1\xspace} % mi dice already defined
+% \renewcommand{\myVersion}{Version 0.1\xspace} % forza, ma tempo potrebbe creare conflitti
+\newcommand{\myVersione}{Versione 0.0.1\xspace}
+
+
+% Diritto d'autore: Attribution-NonCommercial-ShareAlike 4.0 International 
+% \newcommand{\mycopyright}{\includegraphics[width=1.5cm]{1-front/copyright/by-nc-sa.png} 
+%	\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{Creative
+%		Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)  }\xspace}
+
+% Diritto d'autore: Attribution-NonCommercial-NoDerivatives 4.0 International
+% \newcommand{\mycopyright}{\includegraphics[width=1.5cm]{1-front/copyright/by-nc-nd.png} 
+%	\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative
+%		Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) }\xspace}
+
+%\newcommand{\mycopyright}{\includegraphics{1-front/copyright/by-nc-sa-compact.png} 
+%	\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{Creative
+%		Commons Attribution - NonCommercial - ShareAlike 4.0 International (CC BY-NC-SA 4.0)  }\xspace}
+		
+\newcommand{\mycopyright}{%\includegraphics[width=0.3cm]{front/copyright/c.png} 
+\textcopyright\ \xspace}
+
+%\newcommand{\disps}{dispositivo crittografico }
+%\newcommand{\dispp}{dispositivi crittografici }
+
+
+%\newcommand{\codice}[4]
+%{\begin{center}
+%\lstinputlisting[language={C},firstline={#1}, lastline={#2},caption={#3},label={#4}]{"D:/UNIFI/Magistrale/Tesi/spectre/primeProbe/spark.c"}
+%\end{center}}
+	
+%\newcommand{\codspark}[3]{
+%\begin{center}
+%\lstinputlisting[language={C},firstline={#1},lastline={#2},firstnumber={#1},caption={[#3]}]{other/code/spark.c}
+%\end{center}}
+
+\newcommand{\arr}[2]{$\text{\texttt{#1}}\left[ \text{\texttt{#2}}\right]$}
+\newcommand{\arrdoppio}[3]{$\text{\texttt{#1}}\left[ \text{\texttt{#2}} \left[\text{\texttt{#3}}\right]\right]$}
+
+% \newcommand{\kilobyte}{kB}
+% \newcommand{\megabyte}{MB}
+% \newcommand{\gigahertz}{GHz}
+
+\newcommand{\tcal}{\mathbb{T}}
+\newcommand{\talfa}{\mathbb{T}_{\alpha}}
+\newcommand{\tbeta}{\mathbb{T}_{\beta}}
+
+\newcommand{\myfloatalign}{\centering}
+% how all the floats will be aligned
+
+\renewcommand{\lstlistingname}{Codice}% Listing -> Codice
+\renewcommand{\lstlistlistingname}{Elenco dei Codici}% Listings -> List of Algorithms
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}[chapter]
+\theoremstyle{definition}
+\newtheorem{esempio}{Esempio}[chapter]
+%\theoremstyle{plain}
+%\newtheorem{corollario}{Corollario}[teorema]
+%\theoremstyle{plain}
+%\newtheorem{proposizione}{Proposizione}[teorema]
+%\theoremstyle{definition}
+%\newtheorem{protocollo}{Protocollo}[chapter]
+%\newenvironment{sistema}%
+%	{\left\lbrace\begin{array}{@{}l@{}}}%
+%	{\end{array}\right.}
+%--------------------------------------------------------------
+
+%--------------------SETTINGS----------------------------------
+\newlength{\abcd} % for ab..z string length calculation
+\setlength{\extrarowheight}{3pt} % increase table row height
+\captionsetup{format=hang,font=small}
+
+\graphicspath{{other/img/}}
+
+\crefname{listing}{codice}{codici}
+
+% Layout settings
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	ignoremp,
+	bindingoffset = 1cm, 
+	textwidth     = 13.5cm,
+	textheight    = 21.5cm,
+	lmargin       = 3.5cm, % left margin
+	tmargin       = 4cm    % top margin 
+}
+
+\lstset{ %
+	basicstyle=\small\ttfamily, 		% the size of the fonts that are used for the code
+	breaklines=true,                	% sets automatic line breaking
+	captionpos=b,                   	% sets the caption-position to bottom
+	commentstyle=\color{violet},   		% comment style
+	frame=none,							% adds a frame around the code
+	frameround=fttt,					% round corner (use f instead t to edge corner)
+	keepspaces=true,                	% keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},      	% keyword style
+	language=C,               			% the language of the code
+	numbers=left,                   	% where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                  	% how far the line-numbers are from the code
+	numberstyle=\scriptsize\color{black}, % the style that is used for the line-numbers
+	stepnumber=1,                   	% the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{Brown},  		% string literal style
+	tabsize=2                   		% sets default tabsize to 2 spaces
+}
+
+%---------------------PARAMETERS-------------------------------
+\begin{document}
+\frenchspacing
+\raggedbottom
+%--------------------------------------------------------------
+
+%---------------------FRONTMATTER------------------------------
+% A book’s front matter contains such things as the title page, an abstract, a table of contents, a preface, a list of notations, a list of figures, and a list of tables. Some of these front matter pages, such as the title page, are traditionally not numbered.
+
+% The \frontmatter declaration makes the pages numbered in lowercase roman, and makes chapters not numbered, although each chapter’s title appears in the table of contents;
+% \pagenumbering{roman} %_scambiare i due seguenti comandi con \frontmatter
+% \pagestyle{plain} 
+% se usiamo \frontmatter, i comandi soprastanti non sono necessari
+\frontmatter 
+
+% Pagina di Titolo
+\include{1-front/title-page}
+
+% Dedica
+\include{1-front/dedica}
+
+\pagestyle{scrheadings}
+% the page number jumps to the header (in alto a destra).
+ 
+% \pagenumbering{arabic} 
+% usare qui, se si desidera numerazione araba unica delle pagine
+% spostare in mainmatter, se vogliamo numerazione romana per front e araba per il resto
+
+% ToC
+\tableofcontents
+
+% Elenco Immagini
+\listoffigures
+
+% Elenco Codici
+\lstlistoflistings
+
+% Elenco Tabelle
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\let\cleardoublepage\relax
+\vspace*{8ex}
+\listoftables
+\endgroup 
+
+% Citazione
+\cleardoublepage
+\thispagestyle{empty}
+\include{1-front/citazione}
+\cleardoublepage
+
+%--------------------------------------------------------------
+
+%---------------------MAINMATTER-------------------------------
+
+% The \mainmatter changes the behavior back to the expected version, and resets the page number
+\mainmatter
+%\pagenumbering{arabic}
+% use \cleardoublepage here to avoid problems with pdfbookmark
+% il comando sottostante elimina le pagine bianche tra un cap e l'altro
+% consiglio l'eliminazione per la stampa fronte retro => cap iniziano sempre sulla pagine destra
+% \let\cleardoublepage\clearpage	
+% \include{intro} % use \myChapter command instead of \chapter
+% \cleardoublepage\myPart{Part I}
+% \cleardoublepage\myPart{Part II}
+
+% Capitoli
+\include{2-chapters/0-introduzione}
+\include{2-chapters/1-capitolo}
+\include{2-chapters/2-capitolo}
+\include{2-chapters/3-capitolo}
+\include{2-chapters/4-conclusioni}
+
+%---------------------APPENDIX---------------------------------
+\appendix
+\include{3-appendix/a-appendice}
+%\include{3-appendix/b-acronimi}
+%--------------------------------------------------------------
+
+%---------------------BACK-MATTER------------------------------
+\backmatter
+% The back matter may contain such things as a glossary, notes, a bibliography, and an index.
+
+\include{3-appendix/b-acronimi}
+
+% Indice analitico -> usare comando "makeindex" in fase di compilazione
+%\printindex
+
+% Bibliografia -> usare comando "bibtex" in fase di compilazione
+\bibliography{4-back/bibliografia}
+\bibliographystyle{unsrt}
+
+% Ringraziamenti
+\include{4-back/ringraziamenti}
+%--------------------------------------------------------------
+\end{document}
