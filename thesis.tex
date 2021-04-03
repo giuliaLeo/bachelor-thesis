@@ -16,6 +16,7 @@
 
 %--------------------PACKAGES----------------------------------
 \usepackage[italian]{babel} % italian rende i nomi "bibliography" e "index" in italiano
+\usepackage[fixlanguage]{babelbib} % per creare la bibliografia in lingua
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
 \usepackage[square,numbers]{natbib} 
@@ -271,7 +272,10 @@
 
 % Bibliografia -> usare comando "bibtex" in fase di compilazione
 \bibliography{4-back/bibliografia}
-\bibliographystyle{unsrt}
+% \bibliographystyle{unsrt}
+\bibliographystyle{babunsrt-fl}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
 
 % Ringraziamenti
 \include{4-back/ringraziamenti}
