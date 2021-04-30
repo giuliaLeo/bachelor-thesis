@@ -29,3 +29,19 @@ Il processo che si mette in atto consiste di una serie di passi, che vanno dalla
 \\ In primo luogo, si va a suddividere la popolazione sotto esame in gruppi mutualmente esclusivi - come se fossero, per l'appunto, \emph{compartimenti} stagni - così che questi possano riflettere caratteristiche osservabili del processo di infezione. Come evidenziato in \cite{Kiss}, quello che ci si propone di fare è descrivere il più formalmente possibile le transizioni da una classe all'altra, così che si possa tener traccia del numero di individui che vi appartengono; detto risultato può essere raggiunto in modo diverso a seconda di quale tra i già citati approcci si sta seguendo: 
 %nella fattispecie, il caso deterministico tratta le dimensioni dei compartimenti come variabili e porta alla scrittura di un sistema di equazioni differenziali ordinarie che ne seguono l'evoluzione, mentre quello stocastico 
 nella fattispecie, quello deterministico, che richiede la scrittura di un sistema di equazioni differenziali ordinarie ove le variabili in gioco sono le dimensioni dei vari compartimenti, consente di conoscere in modo esaustivo il comportamento di una popolazione a partire dalle sue condizioni iniziali, mentre quello stocastico si basa sull'esistenza implicita di una rete di connettività fra gli individui e, pertanto, tratta le informazioni relative all'infezione in funzione del rate di spostamento fra gli elementi di un reticolo.
+\\
+Sulla falsariga del modello più noto e forse storicamente più rilevante, quello delineato da Kermack e McKendrick nel 1927 \cite{Kermack}, possiamo ora introdurre il modello SIR: esso comporta la ripartizione del campione in esame in tre gruppi, ovvero
+\begin{itemize}
+\item S, i \emph{suscettibili}, coloro che sono in grado di contrarre l'infezione
+\item I, gli \emph{infetti}
+\item R, che può essere interpretato sia come \emph{guariti} (recovered) che come \emph{rimossi} (removed)
+\end{itemize}
+la cui evoluzione temporale è ben descritta dalle seguenti
+\[
+\begin{cases}
+\frac{dS(t)}{dt} = - \beta I(t) \frac{S(t)}{N} \\
+\frac{dI(t)}{dt} = \beta I(t) \frac{S(t)}{N} - \gamma I(t) \\
+\frac{dR(t)}{dt} = \gamma I(t)
+\end{cases} 
+\]
+laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. 
