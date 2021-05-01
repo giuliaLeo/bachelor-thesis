@@ -34,7 +34,7 @@ Sulla falsariga del modello più noto e forse storicamente più rilevante, quell
 \begin{itemize}
 \item S, i \emph{suscettibili}, coloro che sono in grado di contrarre l'infezione
 \item I, gli \emph{infetti}
-\item R, che può essere interpretato sia come \emph{guariti} (recovered) che come \emph{rimossi} (removed)
+\item R, interpretabile sia come \emph{guariti} (recovered) che come \emph{rimossi} (removed)
 \end{itemize}
 la cui evoluzione temporale è ben descritta dalle seguenti
 \[
@@ -44,4 +44,7 @@ la cui evoluzione temporale è ben descritta dalle seguenti
 \frac{dR(t)}{dt} = \gamma I(t)
 \end{cases} 
 \]
-laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. 
+laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione, mentre $S(t) + I(t) + R(t) = N$ fornisce la dimensione della popolazione, anch'essa quantità costante. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. \\ Osserviamo che il modello non perde di senso fintanto che $S(t)$ e $I(t)$ rimangono non negativi; è, pertanto, sufficiente che anche solo uno dei due diventi $0$ perché ciò accada. Notiamo, inoltre, che $\frac{dS(t)}{dt} < 0$ per ogni possibile valore di t, mentre $\frac{dI(t)}{dt} > 0$ se e solo se $\frac{\beta S(t)}{\gamma} > 1$: ciò significa che, fin quando quest'ultima disuguaglianza rimane vera, $I(t)$ cresce, ma in seguito, in virtù del fatto che $S(t)$ diminuisce a prescindere da t, inverte il suo comportamento e finisce per tendere a zero. \\ Quanto appena detto ci dà il via per andare a finire una quantità fondamentale nello studio della diffusione epidemica, il \emph{numero di riproduzione di base} $R_0$
+\begin{equation}
+R_0 = \frac{\beta N}{\gamma}
+\end{equation}
