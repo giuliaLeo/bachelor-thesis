@@ -37,14 +37,31 @@ Sulla falsariga del modello più noto e forse storicamente più rilevante, quell
 \item R, interpretabile sia come \emph{guariti} (recovered) che come \emph{rimossi} (removed)
 \end{itemize}
 la cui evoluzione temporale è ben descritta dalle seguenti
-\[
+\begin{equation}
 \begin{cases}
 \frac{dS(t)}{dt} = - \beta I(t) \frac{S(t)}{N} \\
 \frac{dI(t)}{dt} = \beta I(t) \frac{S(t)}{N} - \gamma I(t) \\
 \frac{dR(t)}{dt} = \gamma I(t)
 \end{cases} 
-\]
-laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione, mentre $S(t) + I(t) + R(t) = N$ fornisce la dimensione della popolazione, anch'essa quantità costante. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. \\ Osserviamo che il modello non perde di senso fintanto che $S(t)$ e $I(t)$ rimangono non negativi; è, pertanto, sufficiente che anche solo uno dei due diventi $0$ perché ciò accada. Notiamo, inoltre, che $\frac{dS(t)}{dt} < 0$ per ogni possibile valore di t, mentre $\frac{dI(t)}{dt} > 0$ se e solo se $\frac{\beta S(t)}{\gamma} > 1$: ciò significa che, fin quando quest'ultima disuguaglianza rimane vera, $I(t)$ cresce, ma in seguito, in virtù del fatto che $S(t)$ diminuisce a prescindere da t, inverte il suo comportamento e finisce per tendere a zero. \\ Quanto appena detto ci dà il via per andare a finire una quantità fondamentale nello studio della diffusione epidemica, il \emph{numero di riproduzione di base} $R_0$
-\begin{equation}
-R_0 = \frac{\beta N}{\gamma}
+\label{SIR}
 \end{equation}
+laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione, mentre $S(t) + I(t) + R(t) = N$ fornisce la dimensione della popolazione, anch'essa quantità costante. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. \\ Osserviamo che il modello non perde di senso fintanto che $S(t)$ e $I(t)$ rimangono non negativi; è, pertanto, sufficiente che anche solo uno dei due diventi $0$ perché ciò accada. Notiamo, inoltre, che $\frac{dS(t)}{dt} < 0$ per ogni possibile valore di t, mentre $\frac{dI(t)}{dt} > 0$ se e solo se $\frac{\beta S(t)}{\gamma} > 1$: ciò significa che, fin quando quest'ultima disuguaglianza rimane vera, $I(t)$ cresce, ma in seguito, in virtù del fatto che $S(t)$ diminuisce a prescindere da t, inverte il suo comportamento e finisce per tendere a zero. \\ Quanto appena detto ci dà il via per andare a definire una quantità fondamentale nello studio della diffusione di una malattia infettiva, il \emph{numero di riproduzione di base} $\mathcal{R}_0$
+\begin{equation}
+\mathcal{R}_0 = \frac{\beta N}{\gamma}
+\end{equation}
+che conta quanti individui, in media, vengono contagiati da un singolo infetto in una popolazione che altrimenti sarebbe interamente sana. In aggiunta, è un buon indicatore dell'eventuale esplodere o meno dell'epidemia; più precisamente
+\[
+\text{se} \,\mathcal{R}_0
+\begin{cases}
+< 1, & \text{allora $I < 0$ e il processo d'infezione si arresta}\\
+> 1, & \text{allora $I$ cresce e l'epidemia prende piede}
+\end{cases}
+\]
+La transizione fra uno scenario e l'altro si ha per $\mathcal{R}_0 = 1$, punto che prende il nome di \emph{soglia epidemica}. \\ Componendo le prime due equazioni \cite{Brauer} che compaiono in \eqref{SIR}, si ottiene
+\[
+\begin{split}
+\log \frac{S_0}{S_\infty} &= \frac{\beta}{\gamma} \left[ N - S_\infty \right ] \\
+						  &= \mathcal{R}_0 \left[1 - \frac{S_\infty}{N} \right ]
+\end{split}
+\] 
+
