@@ -36,7 +36,7 @@ Sulla falsariga del modello più noto e forse storicamente più rilevante, quell
 \item I, gli \emph{infetti}
 \item R, interpretabile sia come \emph{guariti} (recovered) che come \emph{rimossi} (removed)
 \end{itemize}
-la cui evoluzione temporale è ben descritta dalle seguenti
+la cui evoluzione temporale - messa in evidenza nella \cref{fig:evolution} è ben descritta dalle seguenti
 \begin{equation}
 \begin{cases}
 \frac{dS(t)}{dt} = - \beta I(t) \frac{S(t)}{N} \\
@@ -65,3 +65,10 @@ La transizione fra uno scenario e l'altro si ha per $\mathcal{R}_0 = 1$, punto c
 \end{split}
 \] 
 
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=.8, keepaspectratio]{sir_model}
+			\caption{dipendenza temporale delle dimensioni relative dei compartimenti rispetto alla totalità della popolazione; $ \gamma = 1 $ e $ \beta = 1.6 $. \cite{Kiss}}
+			\label{fig:evolution}
+		\end{center}
+	\end{figure}
