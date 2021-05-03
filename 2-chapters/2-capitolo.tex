@@ -15,14 +15,74 @@ Un \emph{grafo} (o una \emph{rete}) è un insieme di elementi detti vertici o \e
 		\end{center}
 	\end{figure}
 	
-Consideriamo una rete non orientata - cioè una rete in cui i link possono essere percorsi indistintamente in un verso e nell'altro - con $ n $ vertici, che andiamo ad etichettare da $ 1 \cdots a n $. Se indichiamo con $ \left( i, j \right) $ l'arco fra i nodi $ i $ e $ j $, allora l'intera rete può essere descritta in funzione della
+Consideriamo una rete non orientata - cioè una rete in cui i link possono essere percorsi indistintamente in un verso e nell'altro - con $ n $ vertici, che andiamo ad etichettare da $ 1 $ ... a $ n $. Se indichiamo con $ \left( i, j \right) $ l'arco fra i nodi $ i $ e $ j $, allora l'intera rete può essere descritta in funzione della
 \begin{definizione}[\textit{Matrice di adiacenza 1}]
-La matrice di adiacenza \textbf{A} relativa ad un grafo non orientato è una matrice i cui elementi sono così definiti:
+La matrice di adiacenza \textbf{A} relativa ad un grafo semplice è una matrice i cui elementi sono così definiti:
 \[
 A_{ij} \, =
 \begin{cases}
-1, & \text{se c'è un arco fra $ i $ e $ j $}\\
+1, & \text{se esiste un arco fra $ i $ e $ j $}\\ 
 0, & \text{altrimenti}
 \end{cases}
 \]
 \end{definizione}
+Se dunque prendiamo, ad esempio, la rete (a) in \cref{fig:net_ex}, assumerà la seguente forma:
+\begin{equation}
+A =
+\begin{pmatrix}
+0 & 1 & 0 & 0 & 1 & 0 \\
+1 & 0 & 1 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation}
+Possiamo osservare che risulta essere una matrice simmetrica con tutti $ 0 $ sulla diagonale. 
+\\Qualora invece ne avessimo sotto esame una più simile alla (b) della medesima figura, dovremmo tener conto del fatto che sono presenti link multipli e loop; si stabilisce di assegnare ai primi un numero pari alla loro molteplicità e ai secondi il valore $ 2 $, così che
+\begin{equation}
+A =
+\begin{pmatrix}
+0 & 1 & 0 & 0 & 3 & 0 \\
+1 & 2 & 2 & 1 & 0 & 0 \\
+0 & 2 & 0 & 1 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 0 \\
+3 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 2
+\end{pmatrix}
+\end{equation}
+matrice che rimane, ad ogni modo, simmetrica.
+\\La questione cambia leggermente se si va a considerare una rete diretta o \emph{digrafo}.
+\begin{definizione}[\textit{Digrafo}]
+Un \emph{digrafo} è un tipo di grafo in cui ogni arco ha una direzione, punta cioè da un vertice ad un altro.
+\end{definizione}
+Ciò ci porta a rivedere quanto detto per la matrice di adiacenza: affermiamo, quindi, che
+\begin{definizione}
+La matrice di adiacenza \textbf{A} relativa ad un grafo orientato è una matrice i cui elementi sono così definiti:
+\[
+A_{ij} \, =
+\begin{cases}
+1, & \text{se esiste un arco da $ j $ a $ i $}\\ 
+0, & \text{altrimenti}
+\end{cases}
+\]
+\end{definizione}
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+		\includegraphics[width=0.38\textwidth]{digraph_example}
+		\caption{Un digrafo.}
+		\label{fig:dig_ex}
+	\end{wrapfigure}
+\medskip	
+Relativamente alla figura qui a fianco, si avrà
+\begin{equation}
+A =
+\begin{pmatrix}
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation}
