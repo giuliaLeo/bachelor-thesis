@@ -163,15 +163,11 @@ e quello interno (relativo agli archi entranti)
 		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}
 	\end{equation}
 \end{itemize}
-%\begin{itemize}
-%\item si può distinguere fra il grado dei nodi uscenti e quello dei nodi entranti
-%$  k_{i}^out = \sum_{j=1}^n A_{ij}	k_{j}^in = \sum{i=1}^n A_{ij} $
-%
-%\item $ m = \sum_{i=1}^n k_i^{in} = \sum_{j=1}^n k_j^{out} = \sum_{ij} A_{ij} $
-%
-%\item $ c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out} $
-%
-%\end{itemize}
 
 
-
+Il concetto di grado ci è immediatamente utile per definirne un altro: quello di \emph{assortatività} o di \emph{mixing assortativo}.
+% o meglio scriverli in inglese?
+ Con questo termine indichiamo una tendenza, da parte dei vertici, a legarsi con altri nodi che, in qualche modo, somigliano loro; è piuttosto immediato pensare che un aspetto che possono avere in comune sia proprio il grado e, in effetti, in questo contesto si parla di mixing assortativo per grado: è possibile andarlo a quantificare mediante un coefficiente \cite{Newman}
+\begin{equation}
+	r = \frac{ \sum_{ij} \left( A_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j}{\sum_{ij} \left(k_i \delta_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j}
+\end{equation}
