@@ -113,7 +113,7 @@ B_{ij} \, =
 
 \begin{wrapfigure}{r}{0.7\textwidth}
 	\begin{center}
-		\includegraphics[width=0.4\textwidth]{projections}
+		\includegraphics[width=0.35\textwidth]{projections}
 	\end{center}
 	\caption{
 %	In figura si mette in luce il passaggio da una rappresentazione tipica di una rete bipartito ad una in cui compaiono solo i vertici. 
@@ -124,7 +124,54 @@ B_{ij} \, =
 \begin{definizione}[\textit{Cricca}] \cite{Bickle}
 Una \emph{cricca} è un sottografo completo, cioè un sottografo in cui ogni vertice è connesso a tutti gli altri.
 \end{definizione}
-	
+L'emergere di questi raggruppamenti, di conseguenza, mette in rilievo l'esistenza di gruppi fortemente coesi all'interno della rete; questo aspetto assume ulteriore valore, in particolare, quando cerchiamo di rispondere ad una domanda che ci siamo posti nel precedente capitolo, ovvero come poter rappresentare una popolazione nella quale stia prendendo piede un certo tipo di malattia infettiva, perché ci consente non solo di dare forma agli individui che la costituiscono, ma anche all'intensità dei legami che intercorrono fra di essi: ci aspettiamo, infatti, che membri di una famiglia o colleghi di lavoro vadano a costituire una cricca. \\
+\begin{definizione}[\textit{Grado di un vertice}]
+Diciamo \emph{grado} di un vertice il numero di archi ad esso connessi.
+\end{definizione}
+Se abbiamo un grafo non orientato con $ n $ vertici, possiamo esprimere il grado dell'i-esimo vertice come
+\begin{equation}
+	k_i = \sum_{j=1}^n A_{ij}
+\end{equation}
+Osserviamo adesso che, se una rete consta di $ m $ link, il numero totale di estremità che possiamo contare - pari a $ 2m $ - altro non è se non la somma dei gradi di tutti i vertici: 
+\begin{equation}
+	m = \frac{1}{2} \sum_{i=1}^n k_i
+\end{equation}
+il che ci porta ad esprimere il grado \emph{medio} di un vertice come 
+\begin{equation}
+ 	c = \frac{1}{2} \sum_{i=1}^n k_i = \frac{2m}{n} 
+\end{equation}
+ \\Indichiamo poi la \emph{densità} di un grafo semplice come la frazione di archi effettivamente presenti:
+\begin{equation}
+	\rho = \frac{m}{\binom{n}{k}} = \frac{2m}{n\left(n-1 \right)} = \frac{c}{n-1}
+\end{equation}
+con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è possibile tracciare. \\Ci soffermiamo brevemente sulle stesse grandezze nel caso in cui si stia esaminando una rete orientata:
+\begin{itemize}
+\item si può distinguere fra il grado esterno (relativo agli archi uscenti da un vertice)
+	\begin{equation}
+		k_{i}^{out} = \sum_{j=1}^n A_{ij}	
+	\end{equation}
+e quello interno (relativo agli archi entranti)
+	\begin{equation}
+		k_{j}^{in} = \sum{i=1}^n A_{ij}
+	\end{equation}
+\item il numero di link presenti è pari a
+	\begin{equation}
+		m = \sum_{i=1}^n k_i^{in} = \sum_{j=1}^n k_j^{out} = \sum_{ij} A_{ij}
+	\end{equation}
+\item il grado medio esterno è equivalente a quello interno
+	\begin{equation}
+		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}
+	\end{equation}
+\end{itemize}
+%\begin{itemize}
+%\item si può distinguere fra il grado dei nodi uscenti e quello dei nodi entranti
+%$  k_{i}^out = \sum_{j=1}^n A_{ij}	k_{j}^in = \sum{i=1}^n A_{ij} $
+%
+%\item $ m = \sum_{i=1}^n k_i^{in} = \sum_{j=1}^n k_j^{out} = \sum_{ij} A_{ij} $
+%
+%\item $ c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out} $
+%
+%\end{itemize}
 
 
 
