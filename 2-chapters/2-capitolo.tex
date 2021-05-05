@@ -1,32 +1,33 @@
 \chapter{Titolo del secondo capitolo}
 \label{chap:cap2}
 
-Le assunzioni secondo cui ogni individuo possa entrare in contatto con chiunque (mixing omogeneo) e il numero di interazioni di ciascun soggetto sia confrontabile con quello degli altri non sono realistiche: anzi, la probabilità che si verifichi un incontro fra due individui presi a caso è praticamente infinitesima. Di norma, ognuno ha una serie di contatti regolari con un numero ristretto di persone (familiari, colleghi, etc), mentre ignora tutto il resto della popolazione; questo li rende particolarmente adatti ad essere rappresentati tramite una rete.
+Le assunzioni secondo cui ogni individuo possa entrare in contatto con chiunque (\emph{mixing omogeneo}) e il numero di interazioni di ciascun soggetto sia confrontabile con quello degli altri non sono realistiche: anzi, la probabilità che si verifichi un incontro fra due individui presi a caso è praticamente infinitesima. Di norma, ognuno ha una serie di contatti regolari con un numero ristretto di persone (familiari, colleghi, etc), mentre ignora tutto il resto della popolazione; questo li rende particolarmente adatti ad essere rappresentati tramite una rete \cite{Barabasi}. \\
+
 \medskip 
 Andiamo ad introdurre una serie di definizioni che in seguito ci risulteranno utili. \\
 \begin{definizione}[\textit{Grafo}]
-Un \emph{grafo} (o una \emph{rete}) è un insieme di elementi detti vertici o \emph{nodi} che possono essere collegati fra loro da segmenti detti archi o \emph{link}.
+Un \emph{grafo} (o una \emph{rete}) è un insieme di elementi detti vertici o \emph{nodi} che possono essere collegati fra loro da segmenti detti archi o \emph{link} \cite{Bickle}.
 \end{definizione}
 \begin{figure}
 		\begin{center}
 			\includegraphics[scale=.8, keepaspectratio]{network_example}
-			\caption{(a) Un grafo semplice, cioè privo di loop o link multipli. (b) Un grafo che presenta entrambi. \cite{Newman}}
+			\caption{(a) Un grafo semplice, cioè privo di loop o link multipli. (b) Un grafo che presenta entrambi \cite{Newman}.}
 			\label{fig:net_ex}
 		\end{center}
 	\end{figure}
 	
 Consideriamo una rete non orientata - cioè una rete in cui i link possono essere percorsi indistintamente in un verso e nell'altro - con $ n $ vertici, che andiamo ad etichettare da $ 1 $ a $ n $. Se indichiamo con $ \left( i, j \right) $ l'arco fra i nodi $ i $ e $ j $, allora l'intera rete può essere descritta in funzione della
 \begin{definizione}[\textit{Matrice di adiacenza I}]
-La matrice di adiacenza \textbf{A} relativa ad un grafo semplice è una matrice i cui elementi sono così definiti:
+La matrice di adiacenza \textbf{A} relativa ad un grafo semplice è una matrice i cui elementi sono così definiti \cite{Newman}:
 \[
 A_{ij} \, =
 \begin{cases}
-1, & \text{se esiste un arco fra $ i $ e $ j $}\\ 
-0, & \text{altrimenti}
+1, & \text{se esiste un arco fra $ i $ e $ j $};\\ 
+0, & \text{altrimenti}.
 \end{cases}
 \]
 \end{definizione}
-Se dunque prendiamo, ad esempio, la rete (a) in \cref{fig:net_ex}, assumerà la seguente forma:
+Se, ad esempio, prendiamo la rete (a) in \cref{fig:net_ex}, assumerà la seguente forma:
 \begin{equation}
 A =
 \begin{pmatrix}
@@ -36,10 +37,10 @@ A =
 0 & 1 & 1 & 0 & 0 & 0 \\
 1 & 0 & 1 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 & 0
-\end{pmatrix}
+\end{pmatrix} .
 \end{equation}
 Possiamo osservare che risulta essere una matrice simmetrica con tutti $ 0 $ sulla diagonale. 
-\\Qualora invece ne avessimo sotto esame una più simile alla (b) della medesima figura, dovremmo tener conto del fatto che sono presenti link multipli e loop; si stabilisce di assegnare ai primi un numero pari alla loro molteplicità e ai secondi il valore $ 2 $, così che
+\\Qualora invece ne avessimo sotto esame una più simile alla rete (b) della medesima figura, dovremmo tener conto del fatto che sono presenti link multipli e loop; si stabilisce di assegnare ai primi un numero pari alla loro molteplicità e ai secondi il valore $ 2 $. Ne risulta una matrice, ancora una volta, simmetrica:
 \begin{equation}
 A =
 \begin{pmatrix}
@@ -49,33 +50,33 @@ A =
 0 & 1 & 1 & 0 & 0 & 0 \\
 3 & 0 & 1 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 & 2
-\end{pmatrix}
+\end{pmatrix} .
 \end{equation}
-matrice che rimane, ad ogni modo, simmetrica.
+
 
 \begin{wrapfigure}{l}{0.4\textwidth}
 		\includegraphics[width=0.38\textwidth]{digraph_example}
-		\caption{Un digrafo. \cite{Newman}}
+		\caption{Un digrafo \cite{Newman}.}
 		\label{fig:dig_ex}
 \end{wrapfigure}
 
 La questione cambia leggermente se si va a considerare una rete diretta o \emph{digrafo}.
 \begin{definizione}[\textit{Digrafo}]
-Un \emph{digrafo} è un tipo di grafo in cui ogni arco ha una direzione, punta cioè da un vertice ad un altro.
+Un \emph{digrafo} è un tipo di grafo in cui ogni arco ha una direzione, punta cioè da un vertice ad un altro \cite{Newman}.
 \end{definizione}
 Ciò ci porta a rivedere quanto detto per la matrice di adiacenza: affermiamo, quindi, che
 \begin{definizione}[\textit{Matrice di adiacenza II}]
-La matrice di adiacenza \textbf{A} relativa ad un grafo orientato è una matrice i cui elementi sono così definiti:
+La matrice di adiacenza \textbf{A} relativa ad un grafo orientato è una matrice i cui elementi sono così definiti \cite{Newman}:
 \[
 A_{ij} \, =
 \begin{cases}
-1, & \text{se esiste un arco da $ j $ a $ i $}\\ 
-0, & \text{altrimenti}
+1, & \text{se esiste un arco da $ j $ a $ i $};\\ 
+0, & \text{altrimenti}.
 \end{cases}
 \]
 \end{definizione}
 
-Relativamente alla \cref{fig:dig_ex}, si avrà pertanto \\
+Relativamente alla \cref{fig:dig_ex}, la matrice assumerà, pertanto, la seguente forma: \\
 \begin{equation}
 A =
 \begin{pmatrix}
@@ -85,60 +86,61 @@ A =
 0 & 0 & 0 & 0 & 0 & 1 \\
 0 & 0 & 0 & 1 & 0 & 0 \\
 0 & 1 & 0 & 0 & 0 & 0
-\end{pmatrix}
+\end{pmatrix} .
 \end{equation}
 \\
 Ci soffermiamo poi su un particolare tipo di grafo, che ci risulterà più utile in seguito.
-\begin{definizione}[\textit{Grafo bipartito}] \cite{Bondy}
-Un grafo si dice \emph{bipartito} se i suoi vertici possono essere suddivisi in due sottoinsiemi X e Y tali che ogni link ha un'estremità in X ed una in Y. 
+\begin{definizione}[\textit{Grafo bipartito}] 
+Un grafo si dice \emph{bipartito} se i suoi vertici possono essere suddivisi in due sottoinsiemi X e Y tali che ogni link ha un'estremità in X ed una in Y \cite{Bondy}. 
 \end{definizione}
-%\begin{figure}[h]
-%	\begin{center}
-%		\includegraphics[scale=1]{bipartite_graph}
-%		\caption{Un grafo bipartito \emph{completo}, in cui ogni vertice del gruppo X è connesso a tutti quelli del gruppo Y.}
-%		\label{fig:bip_graph}
-%	\end{center}
-%\end{figure}
-In modo del tutto equivalente a quanto abbiamo già fatto, possiamo andare a definire per un grafo siffatto una matrice che lo va a descrivere.
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.7]{projections2}
+		\caption{Passaggio da una rappresentazione tipica di una rete bipartita ad una in cui compaiono solo i vertici \cite{Newman}.}
+		\label{fig:proj2}
+	\end{center}
+\end{figure}
+
+In modo del tutto equivalente a quanto abbiamo già fatto, possiamo andare a definire per un grafo del genere una matrice che lo va a descrivere.
 \begin{definizione}[\textit{Matrice di incidenza}]
-La matrice di incidenza \textbf{B} è una matrice $ g x n $, dove $ g $ è il numero di sottoinsiemi e $ n $ quello dei vertici che ne fanno parte, i cui elementi sono definiti come segue:
+La matrice di incidenza \textbf{B} è una matrice $ g \times n $, dove $ g $ è il numero di sottoinsiemi e $ n $ quello dei vertici che ne fanno parte, i cui elementi sono definiti come segue \cite{Newman}:
 \[
 B_{ij} \, =
 \begin{cases}
-1, & \text{se il vertice $ j $ appartiene al gruppo $ i $ }\\
-0, & \text{altrimenti}
+1, & \text{se il vertice $ j $ appartiene al gruppo $ i $ };\\
+0, & \text{altrimenti}.
 \end{cases}
 \]
 \end{definizione}
 
-\begin{wrapfigure}{r}{0.7\textwidth}
-	\begin{center}
-		\includegraphics[width=0.35\textwidth]{projections}
-	\end{center}
-	\caption{
-%	In figura si mette in luce il passaggio da una rappresentazione tipica di una rete bipartito ad una in cui compaiono solo i vertici. 
-	\cite{Newman}}
-	\label{fig:projs}
-\end{wrapfigure}
-	Uno dei pregi di una rete bipartita è quello di consentire in modo fluido il passaggio da una rappresentazione in cui compaiono sia vertici che gruppi ad una in cui figurano, ad esempio, soltanto i vertici; questa possibilità permette di visualizzare il formarsi di quelle che prendono il nome di cricche (\emph{cliques}).
-\begin{definizione}[\textit{Cricca}] \cite{Bickle}
-Una \emph{cricca} è un sottografo completo, cioè un sottografo in cui ogni vertice è connesso a tutti gli altri.
+%\begin{wrapfigure}{r}{0.7\textwidth}
+%	\begin{center}
+%		\includegraphics[width=0.35\textwidth]{projections}
+%	\end{center}
+%	\caption{
+%%	In figura si mette in luce il passaggio da una rappresentazione tipica di una rete bipartito ad una in cui compaiono solo i vertici. 
+%	\cite{Newman}}
+%	\label{fig:projs}
+%\end{wrapfigure}
+	Uno dei pregi di una rete bipartita è quello di consentire in modo fluido il passaggio da una rappresentazione in cui compaiono sia vertici che gruppi ad una in cui, come viene messo in evidenza in \cref{fig:proj2}, sono coinvolti soltanto i vertici; questa possibilità permette di visualizzare il formarsi di quelle che prendono il nome di cricche (\emph{cliques}).
+\begin{definizione}[\textit{Cricca}] 
+Una \emph{cricca} è un sottografo completo, cioè un sottografo in cui ogni vertice è connesso a tutti gli altri \cite{Bickle}.
 \end{definizione}
 L'emergere di questi raggruppamenti, di conseguenza, mette in rilievo l'esistenza di gruppi fortemente coesi all'interno della rete; questo aspetto assume ulteriore valore, in particolare, quando cerchiamo di rispondere ad una domanda che ci siamo posti nel precedente capitolo, ovvero come poter rappresentare una popolazione nella quale stia prendendo piede un certo tipo di malattia infettiva, perché ci consente non solo di dare forma agli individui che la costituiscono, ma anche all'intensità dei legami che intercorrono fra di essi: ci aspettiamo, infatti, che membri di una famiglia o colleghi di lavoro vadano a costituire una cricca. \\
 \begin{definizione}[\textit{Grado di un vertice}]
-Diciamo \emph{grado} di un vertice il numero di archi ad esso connessi.
+Diciamo \emph{grado} di un vertice il numero di archi ad esso connessi \cite{Newman}.
 \end{definizione}
 Se abbiamo un grafo non orientato con $ n $ vertici, possiamo esprimere il grado dell'i-esimo vertice come
 \begin{equation}
-	k_i = \sum_{j=1}^n A_{ij}
+	k_i = \sum_{j=1}^n A_{ij}.
 \end{equation}
 Osserviamo adesso che, se una rete consta di $ m $ link, il numero totale di estremità che possiamo contare - pari a $ 2m $ - altro non è se non la somma dei gradi di tutti i vertici: 
 \begin{equation}
-	m = \frac{1}{2} \sum_{i=1}^n k_i
+	m = \frac{1}{2} \sum_{i=1}^n k_i,
 \end{equation}
 il che ci porta ad esprimere il grado \emph{medio} di un vertice come 
 \begin{equation}
- 	c = \frac{1}{2} \sum_{i=1}^n k_i = \frac{2m}{n} 
+ 	c = \frac{1}{2} \sum_{i=1}^n k_i = \frac{2m}{n}. 
 \end{equation}
  \\Indichiamo poi la \emph{densità} di un grafo semplice come la frazione di archi effettivamente presenti:
 \begin{equation}
@@ -160,14 +162,43 @@ e quello interno (relativo agli archi entranti)
 	\end{equation}
 \item il grado medio esterno è equivalente a quello interno
 	\begin{equation}
-		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}
+		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}.
 	\end{equation}
 \end{itemize}
 
 
 Il concetto di grado ci è immediatamente utile per definirne un altro: quello di \emph{assortatività} o di \emph{mixing assortativo}.
 % o meglio scriverli in inglese?
- Con questo termine indichiamo una tendenza, da parte dei vertici, a legarsi con altri nodi che, in qualche modo, somigliano loro; è piuttosto immediato pensare che un aspetto che possono avere in comune sia proprio il grado e, in effetti, in questo contesto si parla di mixing assortativo per grado: è possibile andarlo a quantificare mediante un coefficiente \cite{Newman}
+ Con questo termine indichiamo una tendenza, da parte dei vertici, a legarsi con altri nodi che, in qualche modo, somigliano loro; è piuttosto immediato pensare che un aspetto che possono avere in comune sia proprio il grado e, in effetti, in questo contesto si parla di mixing assortativo per grado: è possibile andarlo a quantificare mediante un coefficiente di correlazione,
 \begin{equation}
-	r = \frac{ \sum_{ij} \left( A_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j}{\sum_{ij} \left(k_i \delta_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j}
+	r = \frac{ \sum_{ij} \left( A_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j}{\sum_{ij} \left(k_i \delta_{ij} - \frac{k_i k_j}{2m} \right) k_i k_j} $ \cite{Newman}. $
 \end{equation}
+
+\medskip
+%Per riuscire a rimettere insieme modellazione epidemica e teoria dei grafi, è necessario tener duro ed aggiungere altre definizioni a quelle già introdotte nelle pagine precedenti.
+\begin{definizione}[\textit{Grafo aleatorio}] 
+Per un intero positivo $ n $ e un numero reale $ p $ con $ 0 < p < 1 $, il \emph{grafo aleatorio} $ G \left(n,p \right) $ denota lo spazio delle probabilità i cui elementi sono i $ 2^{\binom{n}{2}} $ diversi grafi che si possono generare a partire da un set di vertici $ \lbrace v_1 \dots v_n \rbrace $ \cite{Lesniak}.
+\end{definizione}
+La probabilità che uno qualunque di tutti i possibili grafi semplici G appaia è
+\begin{equation}
+P \left(G \right) = p^m \left( 1 - p \right)^{\binom{n}{2} - m}
+\end{equation}
+ove $ m $ è il numero di archi; pertanto, la probabilità totale di disegnare un grafo con m link a partire dal nostro insieme segue una distribuzione binomiale standard
+\begin{equation}
+P \left(m \right) = \binom{\binom{n}{2}}{m} p^m \left( 1 - p \right)^{\binom{n}{2} - m}.
+\end{equation}
+Il numero atteso di archi, di conseguenza, sarà semplicemente:
+\[
+\langle m \rangle = \sum_{m=0}^{\binom{n}{2}} m P \left(m \right) = \binom{n}{2} p,
+\]
+mentre il grado medio verrà così calcolato:
+%\begin{equation}
+%< k > = sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \righ) = \left( n - 1 \right) p \doteq c
+%\end{equation}
+\[
+\begin{split}
+	\langle k \rangle &= \sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \right) \\
+		  &= \left( n - 1 \right) p \\
+		  & \doteq c.
+\end{split}
+\] 
