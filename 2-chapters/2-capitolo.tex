@@ -202,3 +202,21 @@ mentre il grado medio verrà così calcolato:
 		  & \doteq c.
 \end{split}
 \] 
+Sulla base di quanto appena detto, quindi, $ p $ è la probabilità che un vertice si leghi con uno qualunque degli altri $ n - 1 $ vertici; ciò ci porta ad esprimere la probabilità totale di essere connesso ad esattamente $ k $ nodi è data da:
+\begin{equation}
+p_k = \binom{n - 1}{k} p^k \left(1 - p \right)^{n - 1 - k};
+\end{equation} 
+per $ n \rightarrow \infty $, possiamo andare ad approssimarla come segue
+
+\[
+\begin{split}
+p_k & \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} \\
+    & = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} \\
+    & = \frac{ c^k e^{- c}}{k!}
+\end{split}
+\]
+cioè $ G \left(n,p \right) $ ha una \emph{distribuzione di grado} poissoniana \cite{Newman}. Distinguiamo due casi limite:
+\begin{itemize}
+\item se $ p = 0 $, non ci sono link e la rete risulta totalmente disconnessa; \\
+\item se $ p = 1 $, ogni vertice è connesso a tutti gli altri.
+\end{itemize} 
