@@ -179,7 +179,7 @@ Il concetto di grado ci è immediatamente utile per definirne un altro: quello d
 %\begin{definizione}[\textit{Grafo aleatorio}] 
 %Per un intero positivo $ n $ e un numero reale $ p $ con $ 0 < p < 1 $, il \emph{grafo aleatorio} $ G \left(n,p \right) $ denota lo spazio delle probabilità i cui elementi sono i $ 2^{\binom{n}{2}} $ diversi grafi che si possono generare a partire da un set di vertici $ \lbrace v_1 \dots v_n \rbrace $ \cite{Lesniak}.
 %\end{definizione}
-Una rete reale, tuttavia, non possiede alcun tipo di regolarità, almeno ad un primo sguardo; la difficoltà sta proprio nel riuscire a riprodurre nel miglior modo possibile la disposizione casuale degli archi. A questo proposito andiamo ad introdurre il concetto di \emph{grafo aleatorio}, che possiede alcuni parametri fissati ed altri liberi.
+Una rete reale, tuttavia, non possiede alcun tipo di regolarità, almeno ad un primo sguardo; la difficoltà sta proprio nel riuscire a riprodurre nel miglior modo possibile la disposizione casuale degli archi. A questo proposito andiamo ad introdurre il concetto di \emph{grafo aleatorio}, che viene descritto da una serie di parametri, alcuni dei quali fissati ed altri liberi.
 \begin{definizione}[\textit{Modello $ G\left(n,m\right) $}]
 Un grafo aleatorio di questo tipo consiste di $ n $ nodi connessi da $ m $ link posizionati casualmente.
 \end{definizione}
@@ -196,25 +196,23 @@ ove $ m $ è il numero di archi; pertanto, la probabilità totale di disegnare u
 P \left(m \right) = \binom{\binom{n}{2}}{m} p^m \left( 1 - p \right)^{\binom{n}{2} - m}.
 \end{equation}
 Il numero atteso di archi, di conseguenza, sarà semplicemente:
-\[
+\begin{equation}
 \langle m \rangle = \sum_{m=0}^{\binom{n}{2}} m P \left(m \right) = \binom{n}{2} p,
-\]
+\end{equation}
 mentre il grado medio verrà così calcolato:
-%\begin{equation}
-%< k > = sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \righ) = \left( n - 1 \right) p \doteq c
-%\end{equation}
-\[
+\begin{equation}
 \langle k \rangle = \sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \right) = \left( n - 1 \right) p \doteq c.
-\]
+\end{equation}
 
 Sulla base di quanto appena detto, quindi, $ p $ è la probabilità che un vertice si leghi con uno qualunque degli altri $ n - 1 $ vertici; ciò ci porta ad esprimere la probabilità totale di essere connesso ad esattamente $ k $ nodi è data da:
 \begin{equation}
 p_k = \binom{n - 1}{k} p^k \left(1 - p \right)^{n - 1 - k};
 \end{equation} 
 per $ n \rightarrow \infty $, possiamo andare ad approssimarla come segue
-\[
+
+\begin{equation}
 p_k  \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} = \frac{ c^k e^{- c}}{k!}
-\]
+\end{equation}
 %\begin{split}
 %p_k & \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} \\
 %    & = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} \\
