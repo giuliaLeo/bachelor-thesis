@@ -176,9 +176,17 @@ Il concetto di grado ci è immediatamente utile per definirne un altro: quello d
 
 \medskip
 %Per riuscire a rimettere insieme modellazione epidemica e teoria dei grafi, è necessario tener duro ed aggiungere altre definizioni a quelle già introdotte nelle pagine precedenti.
-\begin{definizione}[\textit{Grafo aleatorio}] 
-Per un intero positivo $ n $ e un numero reale $ p $ con $ 0 < p < 1 $, il \emph{grafo aleatorio} $ G \left(n,p \right) $ denota lo spazio delle probabilità i cui elementi sono i $ 2^{\binom{n}{2}} $ diversi grafi che si possono generare a partire da un set di vertici $ \lbrace v_1 \dots v_n \rbrace $ \cite{Lesniak}.
+%\begin{definizione}[\textit{Grafo aleatorio}] 
+%Per un intero positivo $ n $ e un numero reale $ p $ con $ 0 < p < 1 $, il \emph{grafo aleatorio} $ G \left(n,p \right) $ denota lo spazio delle probabilità i cui elementi sono i $ 2^{\binom{n}{2}} $ diversi grafi che si possono generare a partire da un set di vertici $ \lbrace v_1 \dots v_n \rbrace $ \cite{Lesniak}.
+%\end{definizione}
+Una rete reale, tuttavia, non possiede alcun tipo di regolarità, almeno ad un primo sguardo; la difficoltà sta proprio nel riuscire a riprodurre nel miglior modo possibile la disposizione casuale degli archi. A questo proposito andiamo ad introdurre il concetto di \emph{grafo aleatorio}, che possiede alcuni parametri fissati ed altri liberi.
+\begin{definizione}[\textit{Modello $ G\left(n,m\right) $}]
+Un grafo aleatorio di questo tipo consiste di $ n $ nodi connessi da $ m $ link posizionati casualmente.
 \end{definizione}
+\begin{definizione}[\textit{Modello $ G\left(n,p\right) $}]
+All'interno di questo modello, ciascuna coppia di nodi fra gli $ n $ presenti risulta legata con una probabilità $ p $.
+\end{definizione}
+Poiché il calcolo di tutta una serie di quantità caratteristiche risulta più semplice nel caso del secondo modello, ci concentreremo essenzialmente su quello \cite{Barabasi}. \\
 La probabilità che uno qualunque di tutti i possibili grafi semplici G appaia è
 \begin{equation}
 P \left(G \right) = p^m \left( 1 - p \right)^{\binom{n}{2} - m}
@@ -196,27 +204,26 @@ mentre il grado medio verrà così calcolato:
 %< k > = sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \righ) = \left( n - 1 \right) p \doteq c
 %\end{equation}
 \[
-\begin{split}
-	\langle k \rangle &= \sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \right) \\
-		  &= \left( n - 1 \right) p \\
-		  & \doteq c.
-\end{split}
-\] 
+\langle k \rangle = \sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \right) = \left( n - 1 \right) p \doteq c.
+\]
+
 Sulla base di quanto appena detto, quindi, $ p $ è la probabilità che un vertice si leghi con uno qualunque degli altri $ n - 1 $ vertici; ciò ci porta ad esprimere la probabilità totale di essere connesso ad esattamente $ k $ nodi è data da:
 \begin{equation}
 p_k = \binom{n - 1}{k} p^k \left(1 - p \right)^{n - 1 - k};
 \end{equation} 
 per $ n \rightarrow \infty $, possiamo andare ad approssimarla come segue
-
 \[
-\begin{split}
-p_k & \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} \\
-    & = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} \\
-    & = \frac{ c^k e^{- c}}{k!}
-\end{split}
+p_k  \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} = \frac{ c^k e^{- c}}{k!}
 \]
-cioè $ G \left(n,p \right) $ ha una \emph{distribuzione di grado} poissoniana \cite{Newman}. Distinguiamo due casi limite:
+%\begin{split}
+%p_k & \simeq \frac{ \left(n - 1 \right)^{k}}{k!} p^k e^{- c} \\
+%    & = \frac{ \left(n - 1 \right)^{k}}{k!} \left( \frac{c}{ \left(n - 1 \right)} \right)^k e^{- c} \\
+%    & = \frac{ c^k e^{- c}}{k!}
+%\end{split}
+%\]
+cioè $ G \left(n,p \right) $ ha una \emph{distribuzione di grado} poissoniana \cite{Newman}. Distinguiamo due casi limite \cite{Barabasi}:
 \begin{itemize}
-\item se $ p = 0 $, non ci sono link e la rete risulta totalmente disconnessa; \\
-\item se $ p = 1 $, ogni vertice è connesso a tutti gli altri.
+\item se $ p = 0 $, $ \langle k \rangle = 0 $ e nessun link è presente; \\
+\item se $ p = 1 $, $ \langle k \rangle = 1 $ e ogni vertice risulta connesso a tutti gli altri.
 \end{itemize} 
+Va da sé che, se indichiamo con $ n_g $ la dimensione del più grosso cluster connesso all'interno della rete, nel primo scenario $ n_g = 1 $, mentre nel secondo $ n_g = n $; al crescere di $ \langle k \rangle $ e di conseguenza del rapporto $ \frac{n_g}{n} $, infatti, viene ad emergere quella che indichiamo col nome di \emph{componente gigante} \cite{Erdos}.
