@@ -22,7 +22,9 @@ La modellazione matematica si è rivelata di centrale importanza nel saper rispo
 Il processo che si mette in atto consiste di una serie di passi, che vanno dalla formulazione di assunzioni sulla trasmissione della malattia, a partire dalle quali si può costruire un primo modello, alla validazione dello stesso mediante i dati raccolti. C'è, tuttavia, da tenere conto del fatto che un modello matematico non è che un'approssimazione, basata sulle ipotesi che facciamo a seguito di quanto siamo riusciti ad osservare; ciò si traduce nella necessità, imposta anche da una non adeguata conoscenza della malattia in questione, di fare ricorso a delle semplificazioni: risulta, pertanto, chiara l'esigenza di andare a confermare coi dati, qualora possibile, il modello che si è messo in piedi. \\ Ci sono generalmente tre approcci che si possono seguire:
 \begin{itemize}
 \item quello dei modelli statistici, ampiamente usati in epidemiologia, ma con lo svantaggio, come abbiamo già sottolineato, di necessitare di grandi campioni di dati;
-\item quello dei modelli deterministici, retti dall'assunzione secondo la quale la dimensione delle popolazioni dei suscettibili e degli infetti sia una funzione continua del tempo; risultano meno affidabili se queste ultime constano di pochi individui, tuttavia sono matematicamente maturi e meno dipendenti dai dati;
+\item quello dei modelli deterministici, 
+%retti dall'assunzione secondo la quale la dimensione delle popolazioni dei suscettibili e degli infetti sia una funzione continua del tempo
+che prendono in considerazione soltanto l'evoluzione temporale dei valori medi delle dimensioni delle varie popolazioni; risultano meno affidabili se queste ultime constano di pochi individui, tuttavia sono matematicamente maturi e meno dipendenti dai dati;
 \item infine, quello dei modelli stocastici, che ben si adattano ad essere impiegati nel caso in cui si abbia a che fare con gruppi ristretti, ma che, al contempo, hanno bisogno di un gran numero di simulazioni numeriche \cite{Li}.  
 \end{itemize}
 
@@ -54,7 +56,9 @@ la cui evoluzione temporale - messa in evidenza nella \cref{fig:evolution} - è 
 \label{SIR}
 \end{equation}
 laddove $\beta$ e $\gamma$, entrambe costanti $> 0$, sono rispettivamente il rate d'infezione e di guarigione/rimozione, mentre $S(t) + I(t) + R(t) = N$ fornisce la dimensione della popolazione, anch'essa una quantità costante. Al sistema soprastante vengono aggiunte anche le opportune condizioni iniziali: $S(0) = S_0 > 0$, $I(0) = I_0 > 0$, $R(0) = 0$. 
-\\Osserviamo che il modello non perde di senso fintanto che $S(t)$ e $I(t)$ rimangono non negativi; è, pertanto, sufficiente che anche solo uno dei due diventi pari a zero perché ciò accada. Notiamo, inoltre, che $\frac{dS(t)}{dt} < 0$ per ogni possibile valore di t, mentre $\frac{dI(t)}{dt} > 0$ se e solo se $\frac{\beta S(t)}{\gamma} > 1$: ciò significa che, fin quando quest'ultima disuguaglianza rimane vera, $I(t)$ cresce, ma in seguito, in virtù del fatto che $S(t)$ diminuisce a prescindere da t, inverte il suo comportamento e finisce per tendere a zero. \\ Quanto appena detto ci dà il via per andare a definire una quantità fondamentale nello studio della diffusione di una malattia infettiva, il \emph{numero di riproduzione di base} $\mathcal{R}_0$ 
+\\Osserviamo che il modello non perde di senso fintanto che $S(t)$ e $I(t)$ rimangono non negativi;
+% è, pertanto, sufficiente che anche solo uno dei due diventi pari a zero perché ciò accada. 
+qualora anche solo uno dei due diventi pari a zero, affermiamo che il sistema si arresta: in effetti, una qualsiasi soluzione $ \left( I = 0, S + N = R \right)$ è un punto fisso per il sistema. Notiamo, inoltre, che $\frac{dS(t)}{dt} < 0$ per ogni possibile valore di t, mentre $\frac{dI(t)}{dt} > 0$ se e solo se $\frac{\beta S(t)}{\gamma} > 1$: ciò significa che, fin quando quest'ultima disuguaglianza rimane vera, $I(t)$ cresce, ma in seguito, in virtù del fatto che $S(t)$ diminuisce a prescindere da t, inverte il suo comportamento e finisce per tendere a zero. \\ Quanto appena detto ci dà il via per andare a definire una quantità fondamentale nello studio della diffusione di una malattia infettiva, il \emph{numero di riproduzione di base} $\mathcal{R}_0$ 
 \begin{equation}
 \mathcal{R}_0 = \frac{\beta N}{\gamma}
 \end{equation}
@@ -67,11 +71,8 @@ che conta quanti individui, in media, vengono contagiati da un singolo infetto i
 \end{cases}
 \]
 La transizione fra uno scenario e l'altro si ha per $\mathcal{R}_0 = 1$, punto che prende il nome di \emph{soglia epidemica}. \\ Combinando le prime due equazioni \cite{Brauer} che compaiono in \eqref{SIR}, si ottiene
-\[
-\begin{split}
-\log \frac{S_0}{S_\infty} &= \frac{\beta}{\gamma} \left[ N - S_\infty \right ] \\
-						  &= \mathcal{R}_0 \left[1 - \frac{S_\infty}{N} \right ]
-\end{split}
-\] 
+\begin{equation}
+\log \frac{S_0}{S_\infty} = \frac{\beta}{\gamma} \left[ N - S_\infty \right ] = \mathcal{R}_0 \left[1 - \frac{S_\infty}{N} \right ]
+\end{equation}
 %
-che mette in luce la relazione fra il numero di riproduzione di base e la dimensione finale dell'epidemia, $\left[ N - S_\infty \right ] $.\footnote{Qui abbiamo sottinteso di star cercando delle soluzioni costanti della coppia di equazioni differenziali, $ \left( S_\infty, I_\infty \right ) $; partendo dal presupposto che, a $ t = 0 $, $ S_0 + I_0 = N $ e ricordando che $ lim_{t\to \infty} I(t) = I_\infty = 0 $, risulta che $ \lim_{t\to \infty} S(t) + I(t) = S_\infty $.}
+che mette in luce la relazione fra il numero di riproduzione di base e la dimensione finale dell'epidemia, $\left[ N - S_\infty \right ] $.\footnote{Qui abbiamo sottinteso di star cercando delle soluzioni costanti della coppia di equazioni differenziali, $ \left( S_\infty, I_\infty \right ) $; partendo dal presupposto che, a $ t = 0 $, $ S_0 + I_0 = N $ e ricordando che $ lim_{t\to \infty} I(t) = I_\infty = 0 $, risulta che $ \lim_{t\to \infty} S(t) + I(t) = S_\infty $ \cite{Brauer}.}
