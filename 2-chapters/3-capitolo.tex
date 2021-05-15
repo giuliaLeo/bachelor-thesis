@@ -85,11 +85,6 @@ L'espressione soprastante può essere esplicitata se ci si pone nel limite conti
 \end{equation}
 %\footnote{$ \Gamma \left(a,x\right)$ è la funzione gamma incompleta}
 che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa concludere che $ J_c = 0 \, \forall \tau$ -. Una rete reale, d'altra parte, possiede sempre un numero finito di nodi, per cui anche il taglio deve essere tale; questo ci consente di valutare $ \tau $ per $ J_c = 0 $:
-\begin{equation}
-	\tau_c\left(0\right) = \frac{\alpha - 3}{\alpha - 2} \frac{m^{2 - \alpha} - K^{2 - \alpha}}{m^{3 - \alpha} - K^{3 - \alpha}} \simeq \frac{3 - \alpha}{\alpha - 2} \frac{m^{2 - \alpha}}{K^{3 - \alpha}}
-	\label{tau_zero}
-\end{equation}
-
 \begin{figure}[t]
 		\begin{center}
 			\includegraphics[scale=.8, keepaspectratio]{mean_field_sim2}
@@ -97,6 +92,11 @@ che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa conclud
 			\label{fig:sim2}
 		\end{center}
 \end{figure}
+
+\begin{equation}
+	\tau_c\left(0\right) = \frac{\alpha - 3}{\alpha - 2} \frac{m^{2 - \alpha} - K^{2 - \alpha}}{m^{3 - \alpha} - K^{3 - \alpha}} \simeq \frac{3 - \alpha}{\alpha - 2} \frac{m^{2 - \alpha}}{K^{3 - \alpha}}
+	\label{tau_zero}
+\end{equation}
 Notiamo in \cref{fig:sim2} che, stavolta, c'è un buon accordo fra il modello teorico e i risultati ottenuti dalle simulazioni solo per $ J_c = 0 $; oltrettutto, il valore di $ \tau_c\left(0\right) $ ottenuto a partire dall'approssimazione continua \eqref{tau_zero}, $ \tau\left(0\right) \simeq 0.037 $, è piuttosto diverso da quello calcolato mediante le simulazioni, $ \tau\left(0\right) \simeq 0.08 $. 
 \section{Risultati}
 Quello che possiamo affermare è che, a prescindere dal tipo di rete che andiamo a generare, l'adozione di un livello di precauzione $ J $ sufficientemente alto da parte di tutti gli agenti consente di fermare la diffusione epidemica anche se si è oltrepassata la soglia $ \tau_c $ \cite{Bagnoli2014}.
