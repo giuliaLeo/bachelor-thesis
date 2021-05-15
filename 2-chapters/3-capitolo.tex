@@ -61,17 +61,21 @@ Vediamo adesso cosa cambia se prendiamo in esame una rete a invarianza di scala 
 %aggiungere nota a piè di pagina per precisazione su reti scale-free?
 Imponiamo che il grado di ciascun nodo sia limitato, $ m \leq k \leq K $ \footnote{Può succedere che $ P\left(k\right)$ devii anche in corrispondenza di $ k $ grande; si introduce perciò un taglio $ K $ di qualche tipo in modo da andare a limitare il grado massimo dei vertici \cite{Newman}.}; 
 %nota a piè di pagina per il taglio K
-consci del fatto che $ \sum_{k = 0}^K p_k = 1 $, possiamo normalizzare e ricavare il valore di $ A $, cioè $ A = \tfrac{ \alpha - 1}{m^{1 - \alpha} - K^{1 - \alpha}} $. \\ Utilizzando lo stesso formalismo impiegato in precedenza, possiamo prima di tutto esprimere lo stato di un nodo con connettività $ k $ al tempo $ t + 1 $ nel modo seguente:
+consci del fatto che $ \sum_{k = 0}^K p_k = 1 $, possiamo normalizzare e ricavare il valore di $ A $, cioè 
+\[
+ A = \tfrac{ \alpha - 1}{m^{1 - \alpha} - K^{1 - \alpha}}.
+\]
+ \\ Utilizzando lo stesso formalismo impiegato in precedenza, possiamo prima di tutto esprimere lo stato di un nodo con connettività $ k $ al tempo $ t + 1 $ nel modo seguente:
 \begin{equation}
 	c'_k = \sum_{s_1 \dots s_k = 0}^1 \, \sum_{j_1 \dots j_k = 0}^ \infty \, \prod_{i = 1}^k C\left(j_i,k\right) I\left(s_i, j_i\right) T\left(k|s_i\right),
 \end{equation}
 dove l'indice $ i = 1, \dots, k $ corre sul numero dei vicini e $ s_i = 0, 1 $ esprime il loro stato (rispettivamente, sani e infetti). $ C\left(j,k)\right) $ è la probabilità che un nodo con connettività $ j $ sia legato ad un altro con connettività $ k $, $ I\left(s_i, j_i\right) $ quella che l'$ i $-esimo vicino sia malato e $ T\left(k|s_i\right) $, infine, quella che possa trasmettere l'infezione al nodo sotto esame. \\ Osservando che è possibile riscrivere
 \begin{itemize}
-	\item $ C\left(j,k)\right) = \frac{j P\left(j\right)}{\langle k \rangle} $ (in quanto per reti simmetriche vale $ j C\left(j,k\right) P\left(j\right) = k C\left(k,j\right) P\left(k\right) $),
+	\item $ C\left(j,k\right) = \frac{j P\left(j\right)}{\langle k \rangle} $ \footnote{Dal momento che, per reti simmetriche, vale $ j C\left(j,k\right) P\left(j\right) = k C\left(k,j\right) P\left(k\right) $.},
 	\item $ I\left(s_i, j_i\right) = c_{j_i}^{s_i} \left(1 - c_{j_i}\right)^{1 - s_i} $,
-	\item $ T\left(k|s_i\right) = 1 - \left(1 - \tau \, exp(- \tfrac{J s}{k})\right)^s \simeq s \, \tau \, exp(- \tfrac{J s}{k}) $
+	\item $ T\left(k|s_i\right) = 1 - \left(1 - \tau \, exp(- \tfrac{J s}{k})\right)^s \simeq s \, \tau \, exp(- \tfrac{J s}{k}) $ 
 \end{itemize}
-e definendo $ \tilde{c} \doteq \sum_j j \tfrac{P\left(j\right) c_j}{\langle k \rangle} $, possiamo concludere che \cite{Bagnoli2014}
+e definendo $ \tilde{c} \doteq \sum_j j \tfrac{P\left(j\right) c_j}{\langle k \rangle} $ \cite{Bagnoli2014}, possiamo concludere che 
 \begin{equation}
 	c'_k = \tilde{c} \, k \, \tau \quad exp(- \tfrac{J s}{k}) \left(\tilde{c} \, exp(- \tfrac{J}{k}) + 1 - \tilde{c}\right).
 \end{equation}
@@ -84,7 +88,7 @@ L'espressione soprastante può essere esplicitata se ci si pone nel limite conti
 	\tau_c \left(J_c \right) = J_{c}^{3 - \alpha} \left[ \Gamma \left( \alpha - 3, \tfrac{J_c}{k} \right) - \Gamma \left( \alpha - 3, \tfrac{J_c}{m}\right) \right] 	 
 \end{equation}
 %\footnote{$ \Gamma \left(a,x\right)$ è la funzione gamma incompleta}
-che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa concludere che $ J_c = 0 \, \forall \tau$ -. Una rete reale, d'altra parte, possiede sempre un numero finito di nodi, per cui anche il taglio deve essere tale; questo ci consente di valutare $ \tau $ per $ J_c = 0 $:
+che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa concludere che $ J_c = 0$ $\forall \tau$ -. Una rete reale, d'altra parte, possiede sempre un numero finito di nodi, per cui anche il taglio deve essere tale; questo ci consente di valutare $ \tau $ per $ J_c = 0 $:
 \begin{figure}[t]
 		\begin{center}
 			\includegraphics[scale=.8, keepaspectratio]{mean_field_sim2}
