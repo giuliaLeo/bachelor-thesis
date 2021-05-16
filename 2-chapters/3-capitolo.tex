@@ -63,7 +63,7 @@ Imponiamo che il grado di ciascun nodo sia limitato, $ m \leq k \leq K $ \footno
 %nota a piè di pagina per il taglio K
 consci del fatto che $ \sum_{k = 0}^K p_k = 1 $, possiamo normalizzare e ricavare il valore di $ A $, cioè 
 \[
- A = \tfrac{ \alpha - 1}{m^{1 - \alpha} - K^{1 - \alpha}}.
+ A = \frac{ \alpha - 1}{m^{1 - \alpha} - K^{1 - \alpha}}.
 \]
  \\ Utilizzando lo stesso formalismo impiegato in precedenza, possiamo prima di tutto esprimere lo stato di un nodo con connettività $ k $ al tempo $ t + 1 $ nel modo seguente:
 \begin{equation}
@@ -83,12 +83,6 @@ In prossimità della soglia epidemica, $ \tilde{c} \to 0 $; questo ci permette d
 \begin{equation}
 	\tau_c\left(J_c\right) = \frac{\langle k \rangle}{\sum_k k^2 P\left(j\right) \, exp(-\tfrac{J_c}{k})}.
 \end{equation}
-L'espressione soprastante può essere esplicitata se ci si pone nel limite continuo e si mettono in atto le opportune sostituzioni; infatti, per $ K \gg m $, si ottiene che
-\begin{equation}
-	\tau_c \left(J_c \right) = J_{c}^{3 - \alpha} \left[ \Gamma \left( \alpha - 3, \tfrac{J_c}{k} \right) - \Gamma \left( \alpha - 3, \tfrac{J_c}{m}\right) \right] 	 
-\end{equation}
-%\footnote{$ \Gamma \left(a,x\right)$ è la funzione gamma incompleta}
-che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa concludere che $ J_c = 0$ $\forall \tau$ -. Una rete reale, d'altra parte, possiede sempre un numero finito di nodi, per cui anche il taglio deve essere tale; questo ci consente di valutare $ \tau $ per $ J_c = 0 $:
 \begin{figure}[t]
 		\begin{center}
 			\includegraphics[scale=.8, keepaspectratio]{mean_field_sim2}
@@ -96,7 +90,12 @@ che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa conclud
 			\label{fig:sim2}
 		\end{center}
 \end{figure}
-
+L'espressione soprastante può essere esplicitata se ci si pone nel limite continuo e si mettono in atto le opportune sostituzioni; infatti, per $ K \gg m $, si ottiene che
+\begin{equation}
+	\tau_c \left(J_c \right) = J_{c}^{3 - \alpha} \left[ \Gamma \left( \alpha - 3, \tfrac{J_c}{k} \right) - \Gamma \left( \alpha - 3, \tfrac{J_c}{m}\right) \right] 	 
+\end{equation}
+%\footnote{$ \Gamma \left(a,x\right)$ è la funzione gamma incompleta}
+che risulta evidentemente divergente per $ K \to \infty $ - il che ci fa concludere che $ J_c = 0$ $\forall \tau$ -. Una rete reale, d'altra parte, possiede sempre un numero finito di nodi, per cui anche il taglio deve essere tale; questo ci consente di valutare $ \tau $ per $ J_c = 0 $:
 \begin{equation}
 	\tau_c\left(0\right) = \frac{\alpha - 3}{\alpha - 2} \frac{m^{2 - \alpha} - K^{2 - \alpha}}{m^{3 - \alpha} - K^{3 - \alpha}} \simeq \frac{3 - \alpha}{\alpha - 2} \frac{m^{2 - \alpha}}{K^{3 - \alpha}}
 	\label{tau_zero}
