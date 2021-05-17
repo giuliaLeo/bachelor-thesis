@@ -1,4 +1,4 @@
-\chapter{Titolo del primo capitolo}
+\chapter{Modellare un'epidemia}
 \label{chap:cap1}
 L'obiettivo dietro alla creazione di un modello matematico di una malattia infettiva è quello di arrivare a comprenderne e a descriverne il processo di trasmissione. In linea del tutto generale, possiamo andare a semplificarlo come segue:
 %\begin{enumerate}
@@ -6,20 +6,21 @@ L'obiettivo dietro alla creazione di un modello matematico di una malattia infet
 %\item \textit{b.} un individuo che viene infettato può inizialmente rimanere asintomatico, per poi mostrare i sintomi; può guarire, sia grazie all'assunzione di medicinali che all'azione del sistema immunitario, ed acquisire così una protezione nei confronti di una possibile reinfezione;
 %\item \textit{c.} quando il bacino dei potenziali suscettibili viene sufficientemente svuotato, la diffusione inizia a rallentare fino a fermarsi; se vengono aggiunti nuovi soggetti alla popolazione, che sia a seguito di flussi migratori o di nascite, l'epidemia può persistere per un lungo periodo di tempo e diventare così endemica. \\
 %\end{enumerate}
-
 \begin{enumerate}
 \item[a.] in primo luogo, uno o più soggetti infetti vengono introdotti in una popolazione di individui suscettibili (a rischio, cioè, di contrarre la malattia);
 \item[b.] un individuo che viene infettato può inizialmente rimanere asintomatico, per poi mostrare i sintomi; può guarire, sia grazie all'assunzione di medicinali che all'azione del sistema immunitario, ed acquisire così una protezione nei confronti di una possibile reinfezione;
 \item[c.] quando il bacino dei potenziali suscettibili viene sufficientemente svuotato, la diffusione inizia a rallentare fino a fermarsi; se vengono aggiunti nuovi soggetti alla popolazione, che sia a seguito di flussi migratori o di nascite, l'epidemia può persistere per un lungo periodo di tempo e diventare così endemica. \\
 \end{enumerate}
-
+\section{Perch\'{e} modelliamo: obiettivi e limiti}
 La modellazione matematica si è rivelata di centrale importanza nel saper rispondere alle domande che possono sorgere all'alba di quella che, a tutti gli effetti, potrebbe rivelarsi una nuova epidemia (se non una pandemia), come, ad esempio, quale possa essere il numero di persone bisognose di cure ospedaliere o quali effetti possa sortire l'imposizione di una quarantena. La sua forza sta anche nel fatto che gli approcci tradizionali, quello statistico e quello sperimentale, in questo frangente non si rivelano altrettanto utili: se da una parte diventa complicato riprodurre in laboratorio il comportamento su grande scala di una malattia infettiva, che può coinvolgere un gran numero di persone distribuite in aree geografiche spazialmente estese, dall'altra è difficile fare affidamento su di un'analisi statistica se i dati raccolti non sono completi o accurati (basti pensare alla difficoltà di reperire informazioni su soggetti asintomatici). \\ Lo scopo della modellazione si fa, dunque, triplice:
 \begin{enumerate}
 \item come già detto, consentire una migliore comprensione dei meccanismi di trasmissione dell'infezione;
 \item riuscire, di conseguenza, a predirne l'andamento futuro;
 \item infine, individuare delle modalità di contenimento per tenere sotto controllo la diffusione \cite{Daley}.
 \end{enumerate}
-Il processo che si mette in atto consiste di una serie di passi, che vanno dalla formulazione di assunzioni sulla trasmissione della malattia, a partire dalle quali si può costruire un primo modello, alla validazione dello stesso mediante i dati raccolti. C'è, tuttavia, da tenere conto del fatto che un modello matematico non è che un'approssimazione, basata sulle ipotesi che facciamo a seguito di quanto siamo riusciti ad osservare; ciò si traduce nella necessità, imposta anche da una non adeguata conoscenza della malattia in questione, di fare ricorso a delle semplificazioni: risulta, pertanto, chiara l'esigenza di andare a confermare coi dati, qualora possibile, il modello che si è messo in piedi. \\ Ci sono generalmente tre approcci che si possono seguire:
+Il processo che si mette in atto consiste di una serie di passi, che vanno dalla formulazione di assunzioni sulla trasmissione della malattia, a partire dalle quali si può costruire un primo modello, alla validazione dello stesso mediante i dati raccolti. C'è, tuttavia, da tenere conto del fatto che un modello matematico non è che un'approssimazione, basata sulle ipotesi che facciamo a seguito di quanto siamo riusciti ad osservare; ciò si traduce nella necessità, imposta anche da una non adeguata conoscenza della malattia in questione, di fare ricorso a delle semplificazioni: risulta, pertanto, chiara l'esigenza di andare a confermare coi dati, qualora possibile, il modello che si è messo in piedi. 
+\section{Modelli compartimentali}
+Ci sono generalmente tre approcci che si possono seguire:
 \begin{itemize}
 \item quello dei modelli statistici, ampiamente usati in epidemiologia, ma con lo svantaggio, come abbiamo già sottolineato, di necessitare di grandi campioni di dati;
 \item quello dei modelli deterministici, 
@@ -27,11 +28,10 @@ Il processo che si mette in atto consiste di una serie di passi, che vanno dalla
 che prendono in considerazione soltanto l'evoluzione temporale dei valori medi delle dimensioni delle varie popolazioni; risultano meno affidabili se queste ultime constano di pochi individui, tuttavia sono matematicamente maturi e meno dipendenti dai dati;
 \item infine, quello dei modelli stocastici, che ben si adattano ad essere impiegati nel caso in cui si abbia a che fare con gruppi ristretti, ma che, al contempo, hanno bisogno di un gran numero di simulazioni numeriche \cite{Li}.  
 \end{itemize}
-
 In primo luogo, si va a suddividere la popolazione sotto esame in gruppi mutualmente esclusivi - come se fossero, per l'appunto, \emph{compartimenti} stagni - così che questi possano riflettere caratteristiche osservabili del processo di infezione. Come evidenziato in \cite{Kiss}, quello che ci si propone di fare è descrivere nel modo più formale possibile le transizioni da una classe all'altra, così che si possa tener traccia del numero di individui che vi appartengono; detto risultato può essere raggiunto in modo diverso a seconda di quale tra i già citati approcci si sta seguendo: 
 %nella fattispecie, il caso deterministico tratta le dimensioni dei compartimenti come variabili e porta alla scrittura di un sistema di equazioni differenziali ordinarie che ne seguono l'evoluzione, mentre quello stocastico 
 nella fattispecie, quello deterministico, che richiede la scrittura di un sistema di equazioni differenziali ordinarie ove le variabili in gioco sono le dimensioni dei vari compartimenti, consente di conoscere in modo esaustivo il comportamento di una popolazione a partire dalle sue condizioni iniziali, mentre quello stocastico si basa sull'esistenza implicita di una rete di connettività fra gli individui e, pertanto, tratta le informazioni relative all'infezione in funzione del rate di spostamento fra gli elementi di un reticolo.
-\section{Il modello SIR}
+\subsection{Il modello SIR}
 
 \begin{figure}
 		\begin{center}
