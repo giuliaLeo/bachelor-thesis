@@ -186,6 +186,23 @@
 	tabsize=2                   		% sets default tabsize to 2 spaces
 }
 
+\lstdefinelanguage{NetLogo}{
+    breaklines=true,
+    breakatwhitespace=true,
+    alsoletter={-,?,.},
+    morekeywords=[1]{to, to-report, end},
+    keywordstyle=[1]\color[rgb]{0.25,0.5,0.35},
+    morekeywords=[2]{ask, let, set, if, report, ifelse},
+    keywordstyle=[2]\color{blue},
+    morekeywords=[3]{not, n-of, color},
+    keywordstyle=[3]\color[rgb]{0.6,0,0.8},
+    comment=[l]{\;},
+    commentstyle=\color[rgb]{0.75,0.75,0.75},
+    string=[d]{"},
+    stringstyle=\color{orange},
+    morekeywords=[4]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, true, false},
+    keywordstyle=[4]{\color{orange}},
+}
 %---------------------PARAMETERS-------------------------------
 \begin{document}
 \frenchspacing
