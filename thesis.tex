@@ -29,6 +29,7 @@
 \usepackage{amssymb}
 \usepackage{ellipsis}
 \usepackage{listings}
+\usepackage{lstautogobble}
 \usepackage{subfig}
 \usepackage[format=plain,labelformat=simple,labelsep=colon]{caption}
 \usepackage{appendix}
@@ -192,16 +193,17 @@
     alsoletter={-,?,.},
     morekeywords=[1]{to, to-report, end},
     keywordstyle=[1]\color[rgb]{0.25,0.5,0.35},
-    morekeywords=[2]{ask, let, set, if, report, ifelse},
+    morekeywords=[2]{ask, let, set, if, report, ifelse,  clear-all, no-display, set-default-shape, create-turtles, fd, create-link-with, repeat, display, reset-ticks, stop, create-turtle, move-to, tick, facexy, layout-spring},
     keywordstyle=[2]\color{blue},
-    morekeywords=[3]{not, n-of, color},
+    morekeywords=[3]{turtles, count, with, out-link-neighbors, random-float, exp, not, n-of, color, any?, size, sqrt, my-links, one-of, both-ends, of},
     keywordstyle=[3]\color[rgb]{0.6,0,0.8},
     comment=[l]{\;},
     commentstyle=\color[rgb]{0.75,0.75,0.75},
     string=[d]{"},
     stringstyle=\color{orange},
-    morekeywords=[4]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, true, false},
+    morekeywords=[4]{red, green, yellow, true, false},
     keywordstyle=[4]{\color{orange}},
+    %numberstyle={\color{orange}},
 }
 %--------------------PARAMETERS-------------------------------
 \begin{document}

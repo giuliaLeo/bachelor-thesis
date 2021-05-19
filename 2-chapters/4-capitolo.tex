@@ -26,7 +26,7 @@ Gli agenti - che su NetLogo vengono indicati con il nome di \emph{turtles} - pos
 \end{enumerate}
 Come viene reso evidente in \cref{fig:NetLogo1}, i nodi di colore rosso sono quelli infetti; il loro numero viene stabilito a seguito dell'estrazione di un numero casuale fra $ 0 $ e $ 1 $ e del confronto di questo con la quantità "initial-infected". La probabilità che contagino i vertici ai quali sono collegati è anch'essa aleatoria:
 \begin{center}
-\begin{lstlisting}[language={NetLogo},caption={Porzione di codice in cui si mette in luce il meccanismo di infezione.},label={list:infection_prob}]
+	\begin{lstlisting}[autogobble,language={NetLogo},caption={Porzione di codice in cui si mette in luce il meccanismo di infezione.},label={list:infection_prob}]
 		ask turtles with [state > 0] [
     		ask out-link-neighbors with [state = 0] [
       			if random-float 1 < infectivity * exp(-1 * risk-perception * alert) [
@@ -34,9 +34,18 @@ Come viene reso evidente in \cref{fig:NetLogo1}, i nodi di colore rosso sono que
         				set infected? true
       			]
     		]
-  		] 
-  		\end{lstlisting}
+  		]  
+	\end{lstlisting}
 \end{center}
+%\begin{center}
+%\begin{lstlisting}[language={NetLogo},caption={Porzione di codice in cui si mette in luce il meccanismo di infezione.},label={list:infection_prob}]
+%		ask turtles with [state > 0] 
+%    		ask out-link-neighbors with [state = 0] 
+%      			if random-float 1 < infectivity * exp(-1 * risk-perception * alert) 
+%        				set state num-states
+%        				set infected? true]]]
+%\end{lstlisting}
+%\end{center}
 Si rimanda all'appendice \ref{appendix:code} per il codice sviluppato per intero.
 \section{Analisi sperimentale}
 Abbiamo deciso di eseguire una serie di simulazioni sia per una rete poissoniana che per una scale-free. In entrambe le casistiche, abbiamo mantenuto fissati tutti i parametri in gioco meno "perception-risk", che, invece, abbiamo fatto variare da $ 0.10 $ a $ 0.35 $ a passi di $ 0.05 $; abbiamo poi stabilito di ripetere ogni operazione $ 10 $ volte. I valori comuni che abbiamo impostato sono i seguenti:
@@ -51,23 +60,23 @@ Abbiamo deciso di eseguire una serie di simulazioni sia per una rete poissoniana
 %
 %\subsection{Caso II: rete scale-free}
 %Per questo scenario, abbiamo impostato lo slider "preferential-attachment" su $ 0.60 $.
-L'unica differenza, per quanto riguarda gli slider gestibili dall'utente, sta nel fatto che nel primo caso abbiamo messo "preferential-attachment" pari a $ 0.00 $  - così che la rete generata fosse totalmente aleatoria -, mentre nel secondo l'abbiamo posto pari a $ 0.60 $ (si noti la diversa disposizione dei link in \cref{fig:NetLogo2}).
+L'unica differenza, per quanto riguarda gli slider gestibili dall'utente, sta nel fatto che nel primo caso abbiamo messo "preferential-attachment" pari a $ 0.00 $  - così che la rete generata fosse totalmente aleatoria - mentre nel secondo l'abbiamo posto pari a $ 0.60 $ (si noti la diversa disposizione dei link in \cref{fig:NetLogo2}).
 \begin{figure}[t]
 		\begin{center}
-			\includegraphics[scale=.65, keepaspectratio]{network_w_Netlogo_3}
+			\includegraphics[scale=.65, keepaspectratio]{network_w_Netlogo_3b}
 			\caption{Esempio di rete generata col programma su NetLogo dopo aver impostato "num-nodes" $= 1000 $, "preferential-attachment $= 0.60 $ e "infected-fraction" $= 0.031 $.}
 			\label{fig:NetLogo2}
 		\end{center}
 \end{figure}
-\\Ad ogni lancio del programma, viene decrementata di un'unità la variabile "state", che, per un individuo infetto, ha valore iniziale pari a "num-states"; quando "state" torna uguale a $ 0 $, si assume che il soggetto sia guarito e il nodo che lo va a rappresentare passa dal rosso al giallo \footnote{Nonostante tornino a fare parte del gruppo dei suscettibili (dal momento che stiamo considerando un modello SIS), preferiamo non colorare di verde gli agenti che si sono ristabiliti dalla malattia per poterli distinguere da quelli che non l'hanno mai contratta.}. Inoltre, ogni agente suscettibile conta il numero di vicini - cioè di nodi che ad esso sono collegati - infetti e imposta questo valore come "alert"; viene poi messo in atto il processo di infezione come mostrato nella porzione di codice \ref{list:infection_prob}. Poiché siamo interessati, come già sottolineato, alla frazione di soggetti che non si sono mai ammalati, ne prendiamo nota con la procedura 
+\\Ad ogni lancio del programma, viene decrementata di un'unità la variabile "state", che, per un individuo infetto, ha valore iniziale pari a "num-states"; quando "state" torna uguale a $ 0 $, si assume che il soggetto sia guarito e il nodo che lo va a rappresentare passa dal rosso al giallo \footnote{Nonostante tornino a fare parte del gruppo dei suscettibili (dal momento che stiamo considerando un modello SIS), preferiamo non colorare di verde gli agenti che si sono ristabiliti dalla malattia per poterli distinguere da quelli che non l'hanno mai contratta.}. Inoltre, ogni agente suscettibile conta il numero di vicini - cioè di nodi che ad esso sono collegati - infetti e imposta questo valore come "alert"; viene poi messo in atto il processo di infezione come mostrato nella porzione di codice \ref{list:infection_prob}. \\Poiché siamo interessati, come già sottolineato, alla frazione di soggetti che non si sono mai ammalati, ne prendiamo nota con la procedura 
 \begin{center}
-	\begin{lstlisting}[language={NetLogo},caption={Metodo che riporta la frazione di suscettibili che non hanno mai contratto l'infezione.},label={list:count_susceptibles}]
+	\begin{lstlisting}[autogobble,language={NetLogo},caption={Metodo che riporta la frazione di suscettibili che non hanno mai contratto l'infezione.},label={list:count_susceptibles}]
 		to-report fraction-susceptibles
   			report count turtles with [infected? = false] / count turtles
 		end	
 	\end{lstlisting}
 \end{center}
-che, in seguito, viene sfruttata da BehaviorSpace per andare a stampare questo dato su di un file CSV. \\ Questa operazione viene ripetuta ad ogni "tick", cioè ad ogni istante di tempo; dal momento che è capitato che, nel corso di alcuni test del codice, l'esecuzione non si arrestasse mai, abbiamo aggiunto due stop ad hoc: il primo nel caso in cui si riesca ad estirpare l'epidemia e quindi non ci siano più agenti infetti, il secondo qualora le precauzioni prese non siano sufficienti e la malattia raggiunga tutti gli individui facenti parte della rete.\\Riportiamo in grafico i risultati delle nostre simulazioni:
+che viene successivamente sfruttata da BehaviorSpace per stampare il dato ricercato su di un file CSV. \\ Questa operazione viene ripetuta ad ogni "tick", cioè ad ogni istante di tempo; dal momento che è capitato che, nel corso di alcuni test del codice, l'esecuzione non si arrestasse mai, abbiamo aggiunto due stop ad hoc: il primo nel caso in cui si riesca ad estirpare l'epidemia e quindi non ci siano più agenti infetti, il secondo qualora le precauzioni prese non siano sufficienti e la malattia raggiunga tutti gli individui facenti parte della rete.\\Riportiamo di seguito i risultati delle nostre simulazioni.
 %\begin{figure*}
 %	\begin{minipage}{0.48\textwidth}
 %		\includegraphics[scale = 0.3]{poisson_errorbars_I}
@@ -79,9 +88,9 @@ che, in seguito, viene sfruttata da BehaviorSpace per andare a stampare questo d
 %	\caption{Andamento della frazione dei suscettibili, nel caso di una rete scale-free, in funzione di una diversa percezione del rischio.}
 %	\end{minipage}
 %\end{figure*}
-\begin{figure}
+\begin{figure}[h]
 		\begin{center}
-			\includegraphics[scale=.7, keepaspectratio]{poisson_errorbars_I}
+			\includegraphics[scale=.7, keepaspectratio]{poisson_I}
 			\caption{Andamento della frazione dei suscettibili, nel caso di una rete poissoniana, in funzione di una diversa percezione del rischio.}
 			\label{fig:sim_poisson}
 		\end{center}
@@ -89,9 +98,24 @@ che, in seguito, viene sfruttata da BehaviorSpace per andare a stampare questo d
 
 \begin{figure}
 		\begin{center}
-			\includegraphics[scale=.7, keepaspectratio]{scalefree_errorbars_I}
+			\includegraphics[scale=.7, keepaspectratio]{poisson_errorbars_I}
+			\caption{Come in \cref{fig:sim_poisson} ma con barre d'errore.}
+			\label{fig:sim_poisson2}
+		\end{center}
+\end{figure}
+
+\begin{figure}
+		\begin{center}
+			\includegraphics[scale=.7, keepaspectratio]{scalefree_I}
 			\caption{Andamento della frazione dei suscettibili, nel caso di una rete scale-free, in funzione di una diversa percezione del rischio.}
 			\label{fig:sim_scalefree}
 		\end{center}
 \end{figure}	
-	
+
+\begin{figure}
+		\begin{center}
+			\includegraphics[scale=.7, keepaspectratio]{scalefree_errorbars_I}
+			\caption{Come in \cref{fig:sim_scalefree} ma con barre d'errore.}
+			\label{fig:sim_scalefree2}
+		\end{center}
+\end{figure}	
