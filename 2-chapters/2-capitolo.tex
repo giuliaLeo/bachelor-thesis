@@ -12,7 +12,7 @@ Un \emph{grafo} (o una \emph{rete}) è un insieme di elementi detti vertici o \e
 \begin{figure}
 		\begin{center}
 			\includegraphics[scale=.8, keepaspectratio]{network_example}
-			\caption{(a) Un grafo semplice, cioè privo di loop o link multipli. (b) Un grafo che presenta entrambi \cite{Newman}.}
+			\caption{(a) Un grafo semplice, cioè privo di self-edge o link multipli. (b) Un grafo che presenta entrambi \cite{Newman}.}
 			\label{fig:net_ex}
 		\end{center}
 	\end{figure}
@@ -41,7 +41,7 @@ A =
 \end{pmatrix} .
 \end{equation}
 Possiamo osservare che risulta essere una matrice simmetrica con tutti $ 0 $ sulla diagonale. 
-\\Qualora invece ne avessimo sotto esame una più simile alla rete (b) della medesima figura, dovremmo tener conto del fatto che sono presenti link multipli e loop; si stabilisce di assegnare ai primi un numero pari alla loro molteplicità e ai secondi il valore $ 2 $. Ne risulta una matrice, ancora una volta, simmetrica:
+\\Qualora invece ne avessimo sotto esame una più simile alla rete (b) della medesima figura, dovremmo tener conto del fatto che sono presenti link multipli e self-edge; si stabilisce di assegnare ai primi un numero pari alla loro molteplicità e ai secondi il valore $ 2 $. Ne risulta una matrice, ancora una volta, simmetrica:
 \begin{equation}
 A =
 \begin{pmatrix}
@@ -54,40 +54,40 @@ A =
 \end{pmatrix} .
 \end{equation}
 
-\subsection{Digrafi}
-\begin{wrapfigure}{l}{0.4\textwidth}
-		\includegraphics[width=0.38\textwidth]{digraph_example}
-		\caption{Un digrafo \cite{Newman}.}
-		\label{fig:dig_ex}
-\end{wrapfigure}
-La questione cambia leggermente se si va a considerare una rete diretta o \emph{digrafo}.
-\begin{definizione}[\textit{Digrafo}]
-Un \emph{digrafo} è un tipo di grafo in cui ogni arco ha una direzione, punta cioè da un vertice ad un altro \cite{Newman}.
-\end{definizione}
-Ciò ci porta a rivedere quanto detto per la matrice di adiacenza: affermiamo, quindi, che
-\begin{definizione}[\textit{Matrice di adiacenza II}]
-La matrice di adiacenza \textbf{A} relativa ad un grafo orientato è una matrice i cui elementi sono così definiti \cite{Newman}:
-\[
-A_{ij} \, =
-\begin{cases}
-1, & \text{se esiste un arco da $ j $ a $ i $};\\ 
-0, & \text{altrimenti}.
-\end{cases}
-\]
-\end{definizione}
-
-Relativamente alla \cref{fig:dig_ex}, la matrice assumerà, pertanto, la seguente forma: \\
-\begin{equation}
-A =
-\begin{pmatrix}
-0 & 0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & 1 \\
-0 & 0 & 0 & 1 & 0 & 0 \\
-0 & 1 & 0 & 0 & 0 & 0
-\end{pmatrix} .
-\end{equation}
+%\subsection{Digrafi}
+%\begin{wrapfigure}{l}{0.4\textwidth}
+%		\includegraphics[width=0.38\textwidth]{digraph_example}
+%		\caption{Un digrafo \cite{Newman}.}
+%		\label{fig:dig_ex}
+%\end{wrapfigure}
+%La questione cambia leggermente se si va a considerare una rete diretta o \emph{digrafo}.
+%\begin{definizione}[\textit{Digrafo}]
+%Un \emph{digrafo} è un tipo di grafo in cui ogni arco ha una direzione, punta cioè da un vertice ad un altro \cite{Newman}.
+%\end{definizione}
+%Ciò ci porta a rivedere quanto detto per la matrice di adiacenza: affermiamo, quindi, che
+%\begin{definizione}[\textit{Matrice di adiacenza II}]
+%La matrice di adiacenza \textbf{A} relativa ad un grafo orientato è una matrice i cui elementi sono così definiti \cite{Newman}:
+%\[
+%A_{ij} \, =
+%\begin{cases}
+%1, & \text{se esiste un arco da $ j $ a $ i $};\\ 
+%0, & \text{altrimenti}.
+%\end{cases}
+%\]
+%\end{definizione}
+%
+%Relativamente alla \cref{fig:dig_ex}, la matrice assumerà, pertanto, la seguente forma: \\
+%\begin{equation}
+%A =
+%\begin{pmatrix}
+%0 & 0 & 0 & 1 & 0 & 0 \\
+%0 & 0 & 1 & 0 & 0 & 0 \\
+%1 & 0 & 0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 1 \\
+%0 & 0 & 0 & 1 & 0 & 0 \\
+%0 & 1 & 0 & 0 & 0 & 0
+%\end{pmatrix} .
+%\end{equation}
 \subsection{Grafi bipartiti}
 Ci soffermiamo poi su un ulteriore tipo di grafo, che ci risulterà più utile in seguito.
 \begin{definizione}[\textit{Grafo bipartito}] 
@@ -148,25 +148,26 @@ il che ci porta ad esprimere il grado \emph{medio} di un vertice come
 \begin{equation}
 	\rho = \frac{m}{\binom{n}{k}} = \frac{2m}{n\left(n-1 \right)} = \frac{c}{n-1}
 \end{equation}
-con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è possibile tracciare. \\Ci soffermiamo brevemente sulle stesse grandezze nel caso in cui si stia esaminando una rete orientata:
-\begin{itemize}
-\item si può distinguere fra il grado esterno (relativo agli archi uscenti da un vertice)
-	\begin{equation}
-		k_{i}^{out} = \sum_{j=1}^n A_{ij}	
-	\end{equation}
-e quello interno (relativo agli archi entranti)
-	\begin{equation}
-		k_{j}^{in} = \sum_{i=1}^n A_{ij}
-	\end{equation}
-\item il numero di link presenti è pari a
-	\begin{equation}
-		m = \sum_{i=1}^n k_i^{in} = \sum_{j=1}^n k_j^{out} = \sum_{ij} A_{ij}
-	\end{equation}
-\item il grado medio esterno è equivalente a quello interno
-	\begin{equation}
-		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}.
-	\end{equation}
-\end{itemize}
+con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è possibile tracciare. Chiamiamo, infine, \emph{hub} quei nodi che presentano molte connessioni.\\
+%Ci soffermiamo brevemente sulle stesse grandezze nel caso in cui si stia esaminando una rete orientata:
+%\begin{itemize}
+%\item si può distinguere fra il grado esterno (relativo agli archi uscenti da un vertice)
+%	\begin{equation}
+%		k_{i}^{out} = \sum_{j=1}^n A_{ij}	
+%	\end{equation}
+%e quello interno (relativo agli archi entranti)
+%	\begin{equation}
+%		k_{j}^{in} = \sum_{i=1}^n A_{ij}
+%	\end{equation}
+%\item il numero di link presenti è pari a
+%	\begin{equation}
+%		m = \sum_{i=1}^n k_i^{in} = \sum_{j=1}^n k_j^{out} = \sum_{ij} A_{ij}
+%	\end{equation}
+%\item il grado medio esterno è equivalente a quello interno
+%	\begin{equation}
+%		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}.
+%	\end{equation}
+%\end{itemize}
 Il concetto di grado ci è immediatamente utile per definirne un altro: quello di \emph{assortativit\`{a}} o di \emph{mixing assortativo}.
 % o meglio scriverli in inglese?
  Con questo termine indichiamo una tendenza, da parte dei vertici, a legarsi con altri nodi che, in qualche modo, somigliano loro; è piuttosto immediato pensare che un aspetto che possono avere in comune sia proprio il grado e, in effetti, in questo contesto si parla di mixing assortativo per grado \cite{Newman}: è possibile andarlo a quantificare mediante un coefficiente di correlazione,
