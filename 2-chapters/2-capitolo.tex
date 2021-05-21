@@ -100,7 +100,7 @@ Un grafo si dice \emph{bipartito} se i suoi vertici possono essere suddivisi in 
 		\label{fig:proj2}
 	\end{center}
 \end{figure}
-
+%
 In modo del tutto equivalente a quanto abbiamo già fatto, possiamo andare a definire per un grafo del genere una matrice che lo va a descrivere.
 \begin{definizione}[\textit{Matrice di incidenza}]
 La matrice di incidenza \textbf{B} è una matrice $ g \times n $, dove $ g $ è il numero di sottoinsiemi e $ n $ quello dei vertici che ne fanno parte, i cui elementi sono definiti come segue \cite{Newman}:
@@ -112,7 +112,7 @@ B_{ij} \, =
 \end{cases}
 \]
 \end{definizione}
-
+%
 %\begin{wrapfigure}{r}{0.7\textwidth}
 %	\begin{center}
 %		\includegraphics[width=0.35\textwidth]{projections}
@@ -126,6 +126,7 @@ Uno dei pregi di una rete bipartita è quello di consentire in modo fluido il pa
 \begin{definizione}[\textit{Cricca}] 
 Una \emph{cricca} è un sottografo completo, cioè un sottografo in cui ogni vertice è connesso a tutti gli altri \cite{Bickle}.
 \end{definizione}
+%
 L'emergere di questi raggruppamenti, di conseguenza, mette in rilievo l'esistenza di gruppi fortemente coesi all'interno della rete; questo aspetto assume ulteriore valore, in particolare, quando cerchiamo di rispondere ad una domanda che ci siamo posti nel precedente capitolo, ovvero come poter rappresentare una popolazione nella quale stia prendendo piede un certo tipo di malattia infettiva, perché ci consente non solo di dare forma agli individui che la costituiscono, ma anche all'intensità dei legami che intercorrono fra di essi: ci aspettiamo, infatti, che membri di una famiglia o colleghi di lavoro vadano a costituire una cricca. 
 
 \section{Grado di un vertice e assortativit\`{a}}
@@ -136,6 +137,7 @@ Se abbiamo un grafo non orientato con $ n $ vertici, possiamo esprimere il grado
 \begin{equation}
 	k_i = \sum_{j=1}^n A_{ij}.
 \end{equation}
+%
 Osserviamo adesso che, se una rete consta di $ m $ link, il numero totale di estremità che possiamo contare - pari a $ 2m $ - altro non è se non la somma dei gradi di tutti i vertici: 
 \begin{equation}
 	m = \frac{1}{2} \sum_{i=1}^n k_i,
@@ -148,7 +150,10 @@ il che ci porta ad esprimere il grado \emph{medio} di un vertice come
 \begin{equation}
 	\rho = \frac{m}{\binom{n}{k}} = \frac{2m}{n\left(n-1 \right)} = \frac{c}{n-1}
 \end{equation}
-con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è possibile tracciare. Chiamiamo, infine, \emph{hub} quei nodi che presentano molte connessioni.\\
+con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è possibile tracciare. \\ In questo contesto, può rivelarsi utile aggiungere la seguente definizione:
+\begin{definizione}[\textit{Hub}]
+	Diamo il nome di \emph{hub} a quei nodi con un grande numero di connessioni.
+\end{definizione}
 %Ci soffermiamo brevemente sulle stesse grandezze nel caso in cui si stia esaminando una rete orientata:
 %\begin{itemize}
 %\item si può distinguere fra il grado esterno (relativo agli archi uscenti da un vertice)
@@ -168,7 +173,8 @@ con $ 0 \leq \rho \leq  1 $ e  $ \binom{n}{k} $  numero massimo di link che è p
 %		c^{in} = \frac{1}{n} \sum_{i=1}^n k_i^{in} = \frac{1}{n} \sum_{j=1}^n k_j^{out} = c^{out}.
 %	\end{equation}
 %\end{itemize}
-Il concetto di grado ci è immediatamente utile per definirne un altro: quello di \emph{assortativit\`{a}} o di \emph{mixing assortativo}.
+%
+Il concetto di grado ci è immediatamente utile per introdurne un altro: quello di \emph{assortativit\`{a}} o di \emph{mixing assortativo}.
 % o meglio scriverli in inglese?
  Con questo termine indichiamo una tendenza, da parte dei vertici, a legarsi con altri nodi che, in qualche modo, somigliano loro; è piuttosto immediato pensare che un aspetto che possono avere in comune sia proprio il grado e, in effetti, in questo contesto si parla di mixing assortativo per grado \cite{Newman}: è possibile andarlo a quantificare mediante un coefficiente di correlazione,
 \begin{equation}
@@ -188,6 +194,7 @@ Un grafo aleatorio di questo tipo consiste di $ n $ nodi connessi da $ m $ link 
 \begin{definizione}[\textit{Modello $ G\left(n,p\right) $}]
 All'interno di questo modello, ciascuna coppia di nodi fra gli $ n $ presenti risulta legata con una probabilità $ p $.
 \end{definizione}
+%
 Poiché il calcolo di tutta una serie di quantità caratteristiche risulta più semplice nel caso del secondo modello, ci concentreremo essenzialmente su quello \cite{Barabasi}. \\
 La probabilità che uno qualunque di tutti i possibili grafi semplici G appaia è
 \begin{equation}
@@ -205,7 +212,7 @@ mentre il grado medio verrà così calcolato:
 \begin{equation}
 \langle k \rangle = \sum_{m=0}^{{\binom{n}{2}}} \frac{2m}{n} P \left(m \right) = \left( n - 1 \right) p \doteq c.
 \end{equation}
-
+%
 Sulla base di quanto appena detto, quindi, $ p $ è la probabilità che un vertice si leghi con uno qualunque degli altri $ n - 1 $ vertici; ciò ci porta ad esprimere la probabilità totale di essere connesso ad esattamente $ k $ nodi è data da:
 \begin{equation}
 p_k = \binom{n - 1}{k} p^k \left(1 - p \right)^{n - 1 - k};
