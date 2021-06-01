@@ -7,8 +7,10 @@
 %--------------------------------------------------------------
 
 %--------------------DOCUMENT-CLASS----------------------------
+%\documentclass[openright,titlepage,oneside,fleqn,
+%	headinclude,12pt,a4paper,footinclude,makeidx]{scrbook}
 \documentclass[openright,titlepage,oneside,fleqn,
-	headinclude,12pt,a4paper,footinclude,makeidx]{scrbook}
+	headinclude,10pt,a4paper,footinclude,makeidx]{scrbook}
 
 % sostituire "oneside" con "twoside" per stampa fronte-retro
 % aggiungere "hidelinks" per eliminare i box nei link ipertestuali
@@ -16,13 +18,18 @@
 
 %--------------------PACKAGES----------------------------------
 \usepackage[italian]{babel} % italian rende i nomi "bibliography" e "index" in italiano
+\usepackage[fixlanguage]{babelbib} % per creare la bibliografia in lingua
 \usepackage[utf8]{inputenc} 
+%\usepackage{lmodern}
 \usepackage[T1]{fontenc} 
+%\usepackage{textcomp}
+%\usepackage[OT1]{fontenc}
 \usepackage[square,numbers]{natbib} 
 \usepackage[fleqn]{amsmath}
 \usepackage{amssymb}
 \usepackage{ellipsis}
 \usepackage{listings}
+\usepackage{lstautogobble}
 \usepackage{subfig}
 \usepackage[format=plain,labelformat=simple,labelsep=colon]{caption}
 \usepackage{appendix}
@@ -58,8 +65,8 @@
 %---------------------------------------------------------------
 
 %--------------------NEWCOMMANDS--------------------------------
-\newcommand{\myItalianTitle}{Titolo Italiano\xspace}
-\newcommand{\myEnglishTitle}{English Title\xspace}
+\newcommand{\myItalianTitle}{L'influenza della percezione del rischio nelle dinamiche epidemiche: un approccio con la modellizzazione ad agenti\xspace}
+\newcommand{\myEnglishTitle}{Influence of risk perception in epidemic spreading: an agent-based approach\xspace}
 \newcommand{\myDegree}{Corso di Laurea in Fisica e Astrofisica\xspace}
 \newcommand{\myCurriculum}{Generale\xspace}
 \newcommand{\myName}{Giulia Leone\xspace}
@@ -73,7 +80,7 @@
 
 % \newcommand{\myVersion}{Version 0.1\xspace} % mi dice already defined
 % \renewcommand{\myVersion}{Version 0.1\xspace} % forza, ma tempo potrebbe creare conflitti
-\newcommand{\myVersione}{Versione 0.0.1\xspace}
+\newcommand{\myVersione}{Versione 1.0.0\xspace}
 
 
 % Diritto d'autore: Attribution-NonCommercial-ShareAlike 4.0 International 
@@ -180,7 +187,25 @@
 	tabsize=2                   		% sets default tabsize to 2 spaces
 }
 
-%---------------------PARAMETERS-------------------------------
+\lstdefinelanguage{NetLogo}{
+    breaklines=true,
+    breakatwhitespace=true,
+    alsoletter={-,?,.},
+    morekeywords=[1]{turtles-own, to, to-report, end},
+    keywordstyle=[1]\color[rgb]{0.25,0.5,0.35},
+    morekeywords=[2]{ask, let, set, if, report, ifelse,  clear-all, no-display, set-default-shape, create-turtles, fd, create-link-with, repeat, display, reset-ticks, stop, create-turtle, move-to, tick, facexy, layout-spring},
+    keywordstyle=[2]\color{blue},
+    morekeywords=[3]{turtles, count, with, out-link-neighbors, random-float, exp, not, n-of, color, any?, size, sqrt, my-links, one-of, both-ends, of, links, distancexy},
+    keywordstyle=[3]\color[rgb]{0.6,0,0.8},
+    comment=[l]{\;},
+    commentstyle=\color[rgb]{0.5,0.5,0.5},
+    string=[d]{"},
+    stringstyle=\color{orange},
+    morekeywords=[4]{red, green, yellow, true, false},
+    keywordstyle=[4]{\color{orange}},
+    %numberstyle={\color{orange}},
+}
+%--------------------PARAMETERS-------------------------------
 \begin{document}
 \frenchspacing
 \raggedbottom
@@ -199,7 +224,7 @@
 \include{1-front/title-page}
 
 % Dedica
-\include{1-front/dedica}
+%\include{1-front/dedica}
 
 \pagestyle{scrheadings}
 % the page number jumps to the header (in alto a destra).
@@ -211,20 +236,20 @@
 % ToC
 \tableofcontents
 
-% Elenco Immagini
-\listoffigures
-
-% Elenco Codici
-\lstlistoflistings
-
-% Elenco Tabelle
-\begingroup
-\let\clearpage\relax
-\let\cleardoublepage\relax
-\let\cleardoublepage\relax
-\vspace*{8ex}
-\listoftables
-\endgroup 
+%% Elenco Immagini
+%\listoffigures
+%
+%% Elenco Codici
+%\lstlistoflistings
+%
+%% Elenco Tabelle
+%\begingroup
+%\let\clearpage\relax
+%\let\cleardoublepage\relax
+%\let\cleardoublepage\relax
+%\vspace*{8ex}
+%\listoftables
+%\endgroup 
 
 % Citazione
 \cleardoublepage
@@ -252,7 +277,8 @@
 \include{2-chapters/1-capitolo}
 \include{2-chapters/2-capitolo}
 \include{2-chapters/3-capitolo}
-\include{2-chapters/4-conclusioni}
+\include{2-chapters/4-capitolo}
+\include{2-chapters/5-conclusioni}
 
 %---------------------APPENDIX---------------------------------
 \appendix
@@ -264,14 +290,32 @@
 \backmatter
 % The back matter may contain such things as a glossary, notes, a bibliography, and an index.
 
-\include{3-appendix/b-acronimi}
+%\include{3-appendix/b-acronimi}
 
 % Indice analitico -> usare comando "makeindex" in fase di compilazione
 %\printindex
 
+% Elenco Immagini
+%\listoffigures
+
+% Elenco Codici
+%\lstlistoflistings
+
+% Elenco Tabelle
+%\begingroup
+%\let\clearpage\relax
+%\let\cleardoublepage\relax
+%\let\cleardoublepage\relax
+%\vspace*{8ex}
+%\listoftables
+%\endgroup 
+
 % Bibliografia -> usare comando "bibtex" in fase di compilazione
 \bibliography{4-back/bibliografia}
-\bibliographystyle{unsrt}
+% \bibliographystyle{unsrt}
+\bibliographystyle{babunsrt-fl}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
 
 % Ringraziamenti
 \include{4-back/ringraziamenti}

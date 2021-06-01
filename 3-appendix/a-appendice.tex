@@ -1,2 +1,132 @@
 \chapter{Codice sviluppato: completo e commentato}
 \label{appendix:code}
+Vediamo qui riportato il codice NetLogo sviluppato; tenendo conto della percezione del rischio, va a modellare la diffusione di un'epidemia su due diversi tipi di rete.
+\begin{center}
+	\lstinputlisting[
+		language={NetLogo}, 
+		firstline=1, 
+		lastline=114,
+		label={list:NetLogo_risk_perception}, 
+		frame={none},
+		basicstyle={\small\ttfamily}
+	]{other/code/riskperception-turtles-with-comments.nlogo}
+\end{center}
+
+%\begin{center}
+%	\begin{lstlisting}[autogobble,language={NetLogo},caption={Codice NetLogo che modella la diffusione di un'epidemia su due diversi tipi di rete tenendo conto della percezione del rischio.},label={list:NetLogo_risk_perception}]
+%;; qui vengono specificate le variabili in termine delle quali si descrive lo stato degli agenti ;;
+%turtles-own [state infected? alert]
+%;; procedura di setup, il cui primario obiettivo è quello di ripulire il mondo da precedenti esecuzioni del modello ;;
+%;: crea innanzitutto 2 agenti, li fa allontanare di 5 passi e li lega mediante un arco ;;
+%;; mediante un'estrazione di un numero casuale fra 0 e 1, genera una certa quantità di infetti ;;
+%;; mentre tutti gli altri sono suscettibili ;;
+%to setup
+%  clear-all
+%  no-display
+%  set-default-shape turtles "circle"
+%  ;; create two turtles (nodes) and space them out
+%  create-turtles 2 [
+%    fd 5
+%  ]
+%  ask turtle 0 [ create-link-with turtle 1 ]
+%  repeat num-nodes [
+%    create-network
+%  ]
+%  ask turtles [
+%    set state 0
+%    set infected? false
+%  ]
+%  ask turtles [
+%    if random-float 1 < initial-infected [
+%      set state num-states
+%      set infected? true
+%    ]
+%  ]
+%  recolor
+%  display
+%  reset-ticks
+%end
+%
+%;; procedura che regola il processo di diffusione dell'infezione ;;
+%to go
+%  if (not any? turtles with [color = red] or not any? turtles with [color = green]) [stop] ;; il programma si deve fermare se non ci sono più agenti verdi o rossi
+%;; decrementiamo la variabile state, che tiene conto della durata dell'infezione, di un'unità ;;
+%  ask turtles [
+%    if state > 0 [
+%      set state state - 1
+%    ]
+%  ]
+%;; gli agenti contano il numero di vicini infetti e assegnano questo numero alla variabile alert ;;
+%  ask turtles with [state > 0] [
+%    ask out-link-neighbors with [state = 0] [
+%      set alert count out-link-neighbors with [state > 0]
+%    ]
+%  ]
+%;;
+%  ask turtles with [state > 0] [
+%    ask out-link-neighbors with [state = 0] [
+%      if random-float 1 < infectivity * exp(-1 * risk-perception * alert) [
+%        set state num-states
+%        set infected? true
+%      ]
+%    ]
+%  ]
+%  recolor
+%  tick
+%end
+%
+%;; metodo grazie al quale gli agenti vengono colorati in base al loro stato di salute ;;
+%to recolor
+%  ask turtles [
+%    ifelse state = 0 [
+%      ifelse infected? [
+%        set color yellow
+%      ][
+%        set color green
+%      ]
+%    ][
+%      set color red
+%    ]
+%  ]
+%end
+%
+%;; metodo che viene chiamato nella procedura to go ;;
+%;; seleziona in modo casuale uno degli agenti, al quale viene connesso un nuovo nodo appena generato ;;
+%;; il processo viene ripetuto per un numero di volte pari al numero di nodi, impostato tramite slider, così da creare l'intera rete ;;
+%to create-network
+%  if count turtles > num-nodes [ stop ]
+%  let partner one-of turtles
+%  if random-float 1 < preferential-attachment [
+%    set partner one-of [ both-ends ] of one-of links
+%  ]
+%  create-turtles 1 [
+%    move-to partner
+%    fd 1
+%    create-link-with partner
+%  ]
+%  layout
+%end
+%
+%;; procedura con la quale si stabilisce la dimensione degli agenti basandoci sul valore dello slider display-degree ;;
+%;; e si opera sull'aspetto della rete, in modo che i nodi legati fra loro non risultino né troppo vicini né troppo lontani ;;
+%;; e che non si ammassino in corrispondenza dei bordi ;;
+%to layout
+%  ask turtles [
+%    ifelse display-degree?
+%      [ set size sqrt count my-links ]
+%      [ set size 1 ]
+%  ]
+%  layout-spring turtles links 0.2 2.0 0.5
+%
+%  ask turtles [
+%    facexy 0 0
+%    fd (distancexy 0 0) / 100
+%  ]
+%end
+%
+%;; metodo che riporta il numero di agenti che non si sono mai infettati rispetto al loro numero totale ;;
+%to-report fraction-susceptibles
+%  report count turtles with [infected? = false] / count turtles
+%end
+%	\end{lstlisting}
+%\end{center}

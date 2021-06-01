@@ -1,0 +1,173 @@
+% \addcontentsline{toc}{chapter}{Conclusioni}
+% \chapter*{Conclusioni}
+\chapter{Simulazioni con la modellizzazione ad agenti}
+\label{chap:cap4}
+Come già accennato nel primo capitolo, in questo lavoro di tesi ci siamo serviti di NetLogo al fine di costruire un modello di diffusione epidemica su rete; in particolare, abbiamo fatto uso di BehaviorSpace, uno strumento software, messo a disposizione da NetLogo stesso, che consente di eseguire più volte un esperimento andandone a variare alcuni parametri caratteristici \cite{Wilensky2}. 
+\section{Il modello}
+
+Il nostro obiettivo è quello di andare a valutare come varia la frazione di individui che non contraggono mai l'infezione al mutare della percezione del rischio; al suo aumentare ci aspettiamo, abbastanza intuitivamente, che il processo diffusivo si arresti prima e che, quindi, il numero di soggetti che non si sono ammalati diventi via via maggiore. \\Il modello compartimentale preso in considerazione è il SIS (Suscettibili - Infetti - Suscettibili), che non prevede l'acquisizione di alcun tipo di immunità una volta guariti dall'infezione \cite{Brauer}. 
+La diffusione dell'epidemia avviene su una rete generata algoritmicamente attraverso la procedura \texttt{to-create-network}\footnote{Si consulti l'appendice per il codice completo e commentato.}; il numero di nodi che la costituiva poteva variare da un minimo di $ 2 $ ad un massimo di $ 1000 $, ma si è scelto di mantenere l'indicatore su di questo ultimo valore per tutte le simulazioni condotte.
+%Affinché fosse più immediato visualizzarne l'evoluzione nel tempo, abbiamo generato una rete con un numero di nodi ("num-nodes") che poteva variare da un minimo di $ 2 $ ad un massimo di $ 1000 $; si è scelto di mantenere l'indicatore su di questo ultimo valore per tutte le simulazioni condotte.
+\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=.6, keepaspectratio]{interface_and_network3}
+			\caption{Interfaccia di NetLogo ed esempio di rete generata a partire dai parametri impostati sugli slider.}
+			\label{fig:NetLogo1}
+		\end{center}
+\end{figure}
+Attraverso l'interfaccia grafica che abbiamo creato grazie a NetLogo (si veda \cref{fig:NetLogo1}), è stato anche possibile controllare mediante un cursore (\texttt{preferential-attachment}) la probabilità che un nuovo nodo risultasse legato ad un altro già altamente connesso: ciò ha consentito di dare origine sia a reti totalmente aleatorie che a reti di tipo scale-free. \\Altri parametri presi in considerazione - anch'essi modificabili manualmente tramite slider - sono stati:
+\begin{itemize}
+\item \textit{la frazione iniziale di infetti} (\texttt{fraction-infected});
+\item \textit{il tasso di infettività} (\texttt{infectivity});
+\item \textit{il livello di misure di precauzione} individuali, indicato genericamente come \texttt{risk-perception}, ma coincidente con la quantità $ J $ definita nel precedente capitolo.
+\end{itemize}
+%\begin{figure}[t]
+%		\begin{center}
+%			\includegraphics[scale=.65, keepaspectratio]{network_w_Netlogo_3b}
+%			\caption{Esempio di rete generata dopo aver impostato \texttt{num-nodes} $= 1000 $, \texttt{preferential-attachment} $= 0.60 $ e \texttt{infected-fraction} $= 0.031 $.}
+%			\label{fig:NetLogo2}
+%		\end{center}
+%\end{figure}
+%Ricordiamo, a questo proposito, di aver sostituito alla probabilità di infezione netta $ \tau $ il prodotto $ \tau \cdot exp(-J \tfrac{s}{k}) $, dove con $ \tfrac{s}{k} $ si è indicato la frazione $ s $ di infetti su $ k $ vicini; nel codice sviluppato questa quantità è stata resa dalla variabile "alert" 
+Gli agenti - che su NetLogo vengono indicati con il nome di \texttt{turtles} - possono essere descritti in termini di tre variabili:
+\begin{enumerate}
+\item \texttt{state}, alla quale viene assegnato un valore numerico $ \geq 0 $ sulla base della condizione di salute e che, pertanto, funge da contatore per la durata del periodo d'infezione;
+\item \texttt{infected?}, una variabile booleana;
+\item \texttt{alert}, che tiene conto della quantità di vicini infetti e che, nel precedente capitolo, veniva quantificata dal rapporto $ \tfrac{s}{k}$.
+\end{enumerate}
+Come viene reso evidente in \cref{fig:NetLogo2}, i nodi di colore rosso sono quelli infetti; il loro numero viene stabilito a seguito dell'estrazione di un numero casuale fra $ 0 $ e $ 1 $ e del confronto di questo con la quantità \texttt{initial-infected}. La probabilità che contagino i vertici ai quali sono collegati è anch'essa aleatoria:
+\begin{center}
+	\begin{lstlisting}[autogobble,language={NetLogo},caption={Porzione di codice in cui si implementa il meccanismo di infezione.},label={list:infection_prob}]
+		ask turtles with [state > 0] [
+    		ask out-link-neighbors with [state = 0] [
+      			if random-float 1 < infectivity * exp(-1 * risk-perception * alert) [
+        				set state num-states
+        				set infected? true
+      			]
+    		]
+  		]  
+	\end{lstlisting}
+\end{center}
+\begin{figure}[t]
+		\begin{center}
+			\includegraphics[scale=.65, keepaspectratio]{network_w_Netlogo_3b}
+			\caption{Esempio di rete generata dopo aver impostato \texttt{num-nodes} $= 1000 $, \texttt{preferential-attachment} $= 0.60 $ e \texttt{infected-fraction} $= 0.031 $.}
+			\label{fig:NetLogo2}
+		\end{center}
+\end{figure}
+%\begin{center}
+%\begin{lstlisting}[language={NetLogo},caption={Porzione di codice in cui si mette in luce il meccanismo di infezione.},label={list:infection_prob}]
+%		ask turtles with [state > 0] 
+%    		ask out-link-neighbors with [state = 0] 
+%      			if random-float 1 < infectivity * exp(-1 * risk-perception * alert) 
+%        				set state num-states
+%        				set infected? true]]]
+%\end{lstlisting}
+%\end{center}
+Si rimanda all'appendice \ref{appendix:code} per il codice sviluppato per intero\footnote{Dati raccolti e codice sono consultabili nella seguente cartella GitHub \url{https://github.com/giuliaLeo/netlogo-risk-perception}.}.
+\section{Analisi sperimentale}
+Abbiamo deciso di eseguire una serie di simulazioni sia per una rete poissoniana che per una scale-free. In entrambe le casistiche, abbiamo mantenuto fissati tutti i parametri in gioco meno \texttt{perception-risk}, che, invece, abbiamo fatto variare da $ 0.10 $ a $ 0.35 $ a passi di $ 0.05 $; abbiamo poi stabilito di ripetere ogni operazione $ 10 $ volte. I valori comuni che abbiamo impostato sono i seguenti:
+\begin{itemize}
+\item numero di nodi (\texttt{num-nodes}) $ = 1000 $;
+\item tasso di infettività (\texttt{infectivity}) $ = 0.2 $;
+\item numero iniziale di infetti (\texttt{initial-infected}) $ = 0.031 $;
+\item durata dell'infezione (\texttt{num-states}) $ = 4 $.
+\end{itemize}
+%\subsection{Caso I: rete poissoniana}
+%Abbiamo messo lo slider "preferential-attachment" a $ 0.00 $ ed abbiamo avviato BehaviorSpace; abbiamo atteso che portasse a compimento tutte le esecuzioni
+%
+%\subsection{Caso II: rete scale-free}
+%Per questo scenario, abbiamo impostato lo slider "preferential-attachment" su $ 0.60 $.
+L'unica differenza, per quanto riguarda gli slider gestibili dall'utente (si veda la \cref{fig:NetLogo1}), sta nel fatto che nel primo caso abbiamo messo \texttt{preferential-attachment} pari a $ 0.00 $  - così che la rete generata fosse totalmente aleatoria - mentre nel secondo l'abbiamo posto pari a $ 0.60 $ (si noti la diversa disposizione dei link in \cref{fig:NetLogo2} rispetto a quella in \cref{fig:NetLogo1}).
+%\begin{figure}[t]
+%		\begin{center}
+%			\includegraphics[scale=.65, keepaspectratio]{interface_and_network3}
+%			\caption{Interfaccia di NetLogo ed esempio di rete generata a partire dai parametri impostati sugli slider.}
+%			\label{fig:NetLogo1}
+%		\end{center}
+%\end{figure}
+\\Ad ogni lancio del programma, viene decrementata di un'unità la variabile \texttt{state}, che, per un individuo infetto, ha valore iniziale pari a \texttt{num-states}; quando \texttt{state} torna uguale a $ 0 $, si assume che il soggetto sia guarito e il nodo che lo va a rappresentare passa dal rosso al giallo \footnote{Nonostante tornino a fare parte del gruppo dei suscettibili (dal momento che stiamo considerando un modello SIS), preferiamo non colorare di verde gli agenti che si sono ristabiliti dalla malattia per poterli distinguere da quelli che non l'hanno mai contratta.}. Inoltre, ogni agente suscettibile conta il numero di vicini - cioè di nodi che ad esso sono collegati - infetti e imposta questo valore come \texttt{alert}; viene poi messo in atto il processo di infezione come mostrato nella porzione di codice \ref{list:infection_prob}. \\Poiché siamo interessati, come già sottolineato, alla frazione di soggetti che non si sono mai ammalati, ne prendiamo nota con la procedura 
+\begin{center}
+	\begin{lstlisting}[autogobble,language={NetLogo},caption={Metodo che riporta la frazione di suscettibili che non hanno mai contratto l'infezione.},label={list:count_susceptibles}]
+		to-report fraction-susceptibles
+  			report count turtles with [infected? = false] / count turtles
+		end	
+	\end{lstlisting}
+\end{center}
+che viene successivamente sfruttata da BehaviorSpace per stampare il dato ricercato su di un file CSV. \\ Questa operazione viene ripetuta ad ogni \texttt{tick}, cioè ad ogni istante di tempo. Per evitare che la nostra simulazione avesse una durata di esecuzione infinita, abbiamo aggiunto due stop ad hoc: il primo nel caso in cui si riesca ad estirpare l'epidemia e quindi non ci siano più agenti infetti, il secondo qualora le precauzioni prese non siano sufficienti e la malattia raggiunga tutti gli individui facenti parte della rete.
+\section{Risultati e considerazioni finali}
+Riportiamo di seguito i risultati delle nostre simulazioni.
+%\begin{figure*}
+%	\begin{minipage}{0.48\textwidth}
+%		\includegraphics[scale = 0.3]{poisson_errorbars_I}
+%		\caption{Andamento della frazione dei suscettibili, nel caso di una rete poissoniana, in funzione di una diversa percezione del rischio.}
+%	\end{minipage}
+%\hfill
+%	\begin{minipage}{0.48\textwidth}
+%		\includegraphics[scale = 0.3]{scalefree_errorbars_I}
+%	\caption{Andamento della frazione dei suscettibili, nel caso di una rete scale-free, in funzione di una diversa percezione del rischio.}
+%	\end{minipage}
+%\end{figure*}
+%\begin{figure}
+%		\begin{center}
+%			\includegraphics[scale=.7, keepaspectratio]{poisson_I}
+%			\caption{Andamento della frazione dei suscettibili, nel caso di una rete poissoniana, in funzione di una diversa percezione del rischio.}
+%			\label{fig:sim_poisson}
+%		\end{center}
+%\end{figure}
+%
+%\begin{figure}
+%		\begin{center}
+%			\includegraphics[scale=.7, keepaspectratio]{poisson_errorbars_I}
+%			\caption{Come in \cref{fig:sim_poisson} ma con barre d'errore.}
+%			\label{fig:sim_poisson2}
+%		\end{center}
+%\end{figure}
+%
+%\begin{figure}
+%		\begin{center}
+%			\includegraphics[scale=.7, keepaspectratio]{scalefree_I}
+%			\caption{Andamento della frazione dei suscettibili, nel caso di una rete scale-free, in funzione di una diversa percezione del rischio.}
+%			\label{fig:sim_scalefree}
+%		\end{center}
+%\end{figure}	
+%
+%\begin{figure}
+%		\begin{center}
+%			\includegraphics[scale=.7, keepaspectratio]{scalefree_errorbars_I}
+%			\caption{Come in \cref{fig:sim_scalefree} ma con barre d'errore.}
+%			\label{fig:sim_scalefree2}
+%		\end{center}
+%\end{figure}	
+\begin{figure}
+		\begin{center}
+			\includegraphics[width=0.85\textwidth]{poisson_I}
+			\caption{Andamento della frazione dei suscettibili, nel caso di una rete poissoniana, in funzione di una diversa percezione del rischio.}
+			\label{fig:sim_poisson}
+		\end{center}
+\end{figure}
+%
+\begin{figure}
+		\begin{center}
+			\includegraphics[width=0.85\textwidth]{poisson_errorbars_I}
+			\caption{Come in \cref{fig:sim_poisson} ma con barre d'errore.}
+			\label{fig:sim_poisson2}
+		\end{center}
+\end{figure}
+%
+\begin{figure}
+		\begin{center}
+			\includegraphics[width=0.85\textwidth]{scalefree_I}
+			\caption{Andamento della frazione dei suscettibili, nel caso di una rete scale-free, in funzione di una diversa percezione del rischio.}
+			\label{fig:sim_scalefree}
+		\end{center}
+\end{figure}	
+%
+\begin{figure}
+		\begin{center}
+			\includegraphics[width=0.85\textwidth]{scalefree_errorbars_I}
+			\caption{Come in \cref{fig:sim_scalefree} ma con barre d'errore.}
+			\label{fig:sim_scalefree2}
+		\end{center}
+\end{figure}	
+\\Nel caso di una rete aleatoria, quello che è emerso è che basta cambiare anche di poco il valore di $ J $ per ottenere frazioni significativamente diverse degli agenti rimasti sani per tutta la durata delle simulazioni (basti confrontare l'andamento per $ J = 0.10 $ e per $ J = 0.15 $); in aggiunta, si noti in \cref{fig:sim_poisson} che per $ J \geq 0.30 $ le curve ottenute si fanno praticamente indistinguibili, il che potrebbe far ipotizzare che esista un valore di soglia per $ J $ oltre il quale non si registrano grosse differenze nel numero di individui che non hanno contratto l'infezione \footnote{Per andare a verificare questa supposizione, dovremmo ripetere l'intero esperimento facendo variare $ J $ in un range più ampio.}. \\Come ci aspettavamo, non avviene lo stesso nel caso scale free; difatti, se si tiene sott'occhio la \cref{fig:sim_scalefree}, si può osservare che non si verificano miglioramenti apprezzabili se non a partire da $ J = 0.25 $. Questo comportamento è strettamente legato alla struttura della rete: la presenza di \emph{hub}, cioè di nodi molto connessi, ha reso più complicata l'estinzione dell'epidemia proprio perché questi, in potenza, contagiano un numero di vicini ben più grande rispetto ad un vertice più isolato. Del resto, sarebbe sufficiente osservare anche solo una singola simulazione del modello NetLogo per convincersene: quand'anche la percezione del rischio fosse relativamente alta, se un hub contrae l'infezione è altamente probabile che tutti i nodi che gli sono collegati facciano la stessa fine, mentre è piuttosto verosimile che agenti nella periferia della rete non entrino mai in contatto con la malattia. Si conferma, perciò, uno dei risultati messi in evidenza in \cite{Bagnoli2007}, ovvero la necessità che gli individui con un elevato numero di contatti adottino misure di precauzione più stringenti rispetto al resto della popolazione al fine di porre un ulteriore freno al diffondersi dell'infezione.

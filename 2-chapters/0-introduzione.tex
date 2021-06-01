@@ -6,7 +6,11 @@
 
 %\chapter{Introduzione}
 \label{chap:intro}
-
-\section*{Prova di citazione}
-\cite{BagnoliModeling2020}
-
+Mai quanto nel corso degli ultimi mesi si è mantenuta alta l'attenzione sul problema della diffusione di un'infezione; se prima erano ad appannaggio quasi esclusivo degli addetti al settore, chiunque di noi, oggi, ha certamente consultato almeno una volta mappe e grafici per provare a comprendere cosa stesse succedendo o per orientarsi fra i numeri comunicati giornalmente dai mezzi di informazione. In questo contesto, la modellazione epidemica riveste un ruolo essenziale, in quanto uno dei suoi primi propositi è proprio quello di riuscire a descrivere in modo minuzioso le modalità in cui un virus viene trasmesso da un individuo all'altro; inoltre, permette di gettare uno sguardo a quelli che potrebbero essere gli sviluppi futuri di un'epidemia e di reagire il più prontamente possibile al suo dilagare. 
+\\Partendo dal modello di epidemia su rete sviluppato da Bagnoli \textit{et al.} in \cite{Bagnoli2014}, quello che ci siamo proposti di fare in questo lavoro di tesi è valutare come la propagazione di una malattia infettiva venga influenzata da una diversa percezione del rischio dei componenti della rete, obiettivo che ci siamo prefissati di raggiungere con l'ausilio di un approccio ad agenti. L'elaborato è suddiviso in quattro capitoli, il cui contenuto viene qui esposto brevemente:
+\begin{itemize}
+\item \textit{Capitolo 1}: si descrive cosa significhi modellare un'epidemia, con particolare attenzione a quali siano gli obiettivi che si intende raggiungere e, al contempo, i limiti che si incontrano nel perseguire questo intento. Dopo aver fatto cenno all'approccio compartimentale, si esplora il modello SIR e si mette in rilievo l'importanza del numero di riproduzione di base $\mathcal{R}_0$; infine, si dedica spazio alla modellizzazione ad agenti, che annovera fra i suoi pregi la capacità di evidenziare l'emergenza di tutta una serie di comportamenti collettivi che altrimenti non potrebbero venire predetti.
+\item \textit{Capitolo 2}: si introducono una serie di concetti teorici legati ai grafi, concetti che saranno utili per meglio descrivere l'andamento di un'epidemia su rete.
+\item \textit{Capitolo 3}: si tratta della percezione del rischio e della sua influenza sull'andamento della diffusione dell'infezione; questo elemento viene matematicamente formalizzato andando a modificare la probabilità netta di contrarre la malattia mediante l'aggiunta di due fattori, il primo basato sulla frazione di contatti infetti e l'altro relativo alle misure precauzionali che possono essere messe in atto. Si esplora l'andamento dell'epidemia su due diversi tipi di rete (poissoniana e scale-free) e se ne riportano i risultati sperimentali ottenuti in \cite{Bagnoli2007} e in \cite{Bagnoli2014}.
+\item \textit{Capitolo 4}: facendo riferimento ai concetti introdotti e ai risultati evidenziati nei capitoli precedenti, si spiega come sia stato costruito il modello NetLogo del quale ci si è serviti per condurre le simulazioni; se ne sono poi messi in luce gli esiti e il loro confermare quanto precedentemente ottenuto.
+\end{itemize}
